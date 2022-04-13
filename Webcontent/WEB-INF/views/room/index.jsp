@@ -5,7 +5,8 @@
 	<%@include file="/WEB-INF/views/includes/navbar.jsp"%>
 	<div class="pseudo"></div>	
 	<main class="container">
-		<div class="row ">
+	<%-- 
+	<div class="row ">
 			<div class="col-12">
 				<p class="room_list--text">Danh sách phòng</p>
 			</div>
@@ -45,6 +46,9 @@
 				</div>
 			</div>
 		</div>
+	--%>
+	
+		
 		<div class="room">
                 <h2 class="room_name">Danh sách phòng</h2>
                 <hr/>
@@ -53,7 +57,7 @@
                 </div>
                 <table class="table table-striped  table-bordered">
                     <thead>
-                      <tr>
+                      <tr style="text-align: center">
                         <th scope="col">Mã phòng</th>
                         <th scope="col">Số người tối đa</th>
                         <th scope="col">Đơn giá</th>
@@ -67,13 +71,12 @@
                     <tbody>
                     <c:forEach var="r" items="${rooms}">
 						<tr>
-							
-							<td>${r.MAPHONG }</td>
-							<td>${r.SLNGUOITOIDA}</td>
-							<td>${r.DONGIA }</td>
-							<td>${r.KHU.TENKHU }</td>
-							<td>${r.TRANGTHAI.TENTT }</td>
-							<td>${r.MOTA }</td>
+							<td style="width: 7%">${r.MAPHONG }</td>
+							<td style="width: 8%">${r.SLNGUOITOIDA}</td>
+							<td style="width: 15%">${r.DONGIA }</td>
+							<td style="width: 10%">${r.KHU.TENKHU }</td>
+							<td style="width: 10%">${r.TRANGTHAI.TENTT }</td>
+							<td style="width: 30%">${r.MOTA }</td>
 							 <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkDelete"><i class='bx bx-folder-minus' style="font-size: 18px;"></i></a></td>
                         <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkEdit"><i class='bx bx-edit' style="font-size: 18px;"></i></a></td>
 						</tr>
@@ -83,7 +86,7 @@
                   </table>
                 
 					<span>${message}</span>
-                  <form:form modelAttribute="room" method="POST">
+                  <form:form modelAttribute="room" method="POST" action="room/index.htm">
                     <div class="form-row">
                       <div class="form-group col-4">
                         <label for="soNguoiTD" class="room__label">Số người 1 phòng</label>

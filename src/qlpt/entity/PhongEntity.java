@@ -84,5 +84,11 @@ public class PhongEntity implements Serializable{
 	public PhongEntity() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "PhongEntity [MAPHONG=" + MAPHONG + ", SLNGUOITOIDA=" + SLNGUOITOIDA + ", DONGIA=" + DONGIA + ", MOTA="
+				+ MOTA + ", TRANGTHAI=" + TRANGTHAI + ", KHU=" + KHU + "]";
+	}
 	
 }
