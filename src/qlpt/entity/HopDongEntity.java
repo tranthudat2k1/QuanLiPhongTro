@@ -25,7 +25,7 @@ public class HopDongEntity implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "MAPHONG")
+	@JoinColumn(name ="MAPHONG")
 	private PhongEntity PHONG;
 	
 	@Temporal(TemporalType.DATE)
