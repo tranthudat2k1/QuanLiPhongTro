@@ -25,11 +25,14 @@ public class PhongEntity implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "MATT")
-	TrangThaiEntity TRANGTHAI;
+	TrangThaiEntity trangThai;
 	
 	@ManyToOne
 	@JoinColumn(name = "MAKHU")
-	private KhuEntity KHU;
+	private KhuEntity khu;
+	
+	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER)
+	Collection<CTHopDongEntity> dsCTHopDong;
 	
 
 	public int getMAPHONG() {
@@ -63,26 +66,32 @@ public class PhongEntity implements Serializable{
 	public void setMOTA(String mOTA) {
 		MOTA = mOTA;
 	}
-
-	public TrangThaiEntity getTRANGTHAI() {
-		return TRANGTHAI;
-	}
-
-	public void setTRANGTHAI(TrangThaiEntity tRANGTHAI) {
-		TRANGTHAI = tRANGTHAI;
-	}
-
-	public KhuEntity getKHU() {
-		return KHU;
-	}
-
-	public void setKHU(KhuEntity kHU) {
-		KHU = kHU;
-	}
-
-
 	public PhongEntity() {
 		super();
+	}
+
+	public TrangThaiEntity getTrangThai() {
+		return trangThai;
+	}
+
+	public void setTrangThai(TrangThaiEntity trangThai) {
+		this.trangThai = trangThai;
+	}
+
+	public KhuEntity getKhu() {
+		return khu;
+	}
+
+	public void setKhu(KhuEntity khu) {
+		this.khu = khu;
+	}
+
+	public Collection<CTHopDongEntity> getDsCTHopDong() {
+		return dsCTHopDong;
+	}
+
+	public void setDsCTHopDong(Collection<CTHopDongEntity> dsCTHopDong) {
+		this.dsCTHopDong = dsCTHopDong;
 	}
 	
 }

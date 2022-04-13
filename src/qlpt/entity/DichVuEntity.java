@@ -1,6 +1,5 @@
 package qlpt.entity;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table( name = "DICHVU")
-public class DichVuEntity implements Serializable{
+public class DichVuEntity{
 	@Id
 	@GeneratedValue
 	@Column(name = "MADV")
@@ -28,7 +27,7 @@ public class DichVuEntity implements Serializable{
 	@Column(name = "DONGIA")
 	private double DONGIA;
 	
-	@OneToMany(mappedBy = "DICHVU", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "dichVu", fetch = FetchType.EAGER)
 	private Collection<CTDichVuEntity> dsCTDichVu;
 
 	public Collection<CTDichVuEntity> getDsCTDichVu() {

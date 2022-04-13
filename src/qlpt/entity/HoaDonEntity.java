@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "HOADON")
 public class HoaDonEntity {
 	@Id
-	private String MAHD;
+	private String MAHOADON;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -27,15 +27,15 @@ public class HoaDonEntity {
 	private float THUE;
 	private double TONGPHUTHU;
 	
-	@OneToMany(mappedBy = "HOADON", fetch = FetchType.EAGER)
-	private Collection<CTDichVuEntity> dsCTDichVu;
+	@OneToMany(mappedBy = "hoaDon", fetch = FetchType.EAGER)
+	private Collection<CTHopDongEntity> dsCtHopDong;
 	
 	
-	public String getMAHD() {
-		return MAHD;
+	public String getMAHOADON() {
+		return MAHOADON;
 	}
-	public void setMAHD(String mAHD) {
-		MAHD = mAHD;
+	public void setMAHOADON(String mAHOADON) {
+		MAHOADON = mAHOADON;
 	}
 	public Date getNGAYLAP() {
 		return NGAYLAP;
@@ -61,14 +61,14 @@ public class HoaDonEntity {
 	public void setTONGPHUTHU(double tONGPHUTHU) {
 		TONGPHUTHU = tONGPHUTHU;
 	}
-	public Collection<CTDichVuEntity> getDsCTDichVu() {
-		return dsCTDichVu;
-	}
-	public void setDsCTDichVu(Collection<CTDichVuEntity> dsCTDichVu) {
-		this.dsCTDichVu = dsCTDichVu;
-	}
 	public HoaDonEntity() {
 		super();
+	}
+	public Collection<CTHopDongEntity> getDsCtHopDong() {
+		return dsCtHopDong;
+	}
+	public void setDsCtHopDong(Collection<CTHopDongEntity> dsCtHopDong) {
+		this.dsCtHopDong = dsCtHopDong;
 	}
 	
 	

@@ -24,7 +24,7 @@ public class ChuTroEntity {
 	private String TAIKHOAN;
 	private String PASSWORD;
 	
-	@OneToMany(mappedBy = "CHUTRO", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "chuTro", fetch = FetchType.EAGER)
 	private Collection<KhuEntity> dsKhu;
 	
 	public String getMACT() {
@@ -103,4 +103,5 @@ public class ChuTroEntity {
 	public ChuTroEntity() {
 		super();
 	}
+	
 }
