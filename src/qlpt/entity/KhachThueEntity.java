@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "KHACHTHUE")
 public class KhachThueEntity {
 	@Id
-	private String MAKHACH;
+	private String MAKT;
 	private String HO;
 	private String TEN;
 	private int NAMSINH;
@@ -23,16 +23,11 @@ public class KhachThueEntity {
 	private String SDT;
 	private String NGHENGHIEP;
 	
-	@OneToMany(mappedBy = "KHACHTHUE", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "khachThue", fetch = FetchType.EAGER)
 	private Collection<HopDongEntity> dsHopDong;
 
-	public String getMAKHACH() {
-		return MAKHACH;
-	}
-
-	public void setMAKHACH(String mAKHACH) {
-		MAKHACH = mAKHACH;
-	}
+	@OneToMany(mappedBy = "khachThue" , fetch=FetchType.EAGER)
+	private Collection<CTKhachThueEntity> dsCTKhachThue;
 
 	public String getHO() {
 		return HO;
@@ -116,6 +111,22 @@ public class KhachThueEntity {
 
 	public KhachThueEntity() {
 		super();
+	}
+
+	public String getMAKT() {
+		return MAKT;
+	}
+
+	public void setMAKT(String mAKT) {
+		MAKT = mAKT;
+	}
+
+	public Collection<CTKhachThueEntity> getDsCTKhachThue() {
+		return dsCTKhachThue;
+	}
+
+	public void setDsCTKhachThue(Collection<CTKhachThueEntity> dsCTKhachThue) {
+		this.dsCTKhachThue = dsCTKhachThue;
 	}
 	
 	

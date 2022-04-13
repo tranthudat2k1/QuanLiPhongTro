@@ -22,13 +22,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CTDichVuEntity implements Serializable {
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "MAPHONG")
-	private PhongEntity PHONG;
+	@JoinColumn(name = "MACTHD")
+	private CTHopDongEntity ctHopDong;
 	
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "MADV")
-	private DichVuEntity DICHVU;
+	private DichVuEntity dichVu;
 
 	@Column(name = "THANG" )
 	@Temporal(TemporalType.DATE)
@@ -41,9 +41,6 @@ public class CTDichVuEntity implements Serializable {
 	@Column(name = "CHISOMOI" )
 	private int CHISOMOI;
 
-	@ManyToOne
-	@JoinColumn(name = "MAHD")
-	private HoaDonEntity HOADON;
 
 	public Date getTHANG() {
 		return THANG;
@@ -69,32 +66,26 @@ public class CTDichVuEntity implements Serializable {
 		CHISOMOI = cHISOMOI;
 	}
 
-	public HoaDonEntity getHOADON() {
-		return HOADON;
-	}
-
-	public void setHOADON(HoaDonEntity hOADON) {
-		HOADON = hOADON;
-	}
 
 	public CTDichVuEntity() {
 		super();
 	}
 
-	public PhongEntity getPHONG() {
-		return PHONG;
+
+	public CTHopDongEntity getCtHopDong() {
+		return ctHopDong;
 	}
 
-	public void setPHONG(PhongEntity pHONG) {
-		PHONG = pHONG;
+	public void setCtHopDong(CTHopDongEntity ctHopDong) {
+		this.ctHopDong = ctHopDong;
 	}
 
-	public DichVuEntity getDICHVU() {
-		return DICHVU;
+	public DichVuEntity getDichVu() {
+		return dichVu;
 	}
 
-	public void setDICHVU(DichVuEntity dICHVU) {
-		DICHVU = dICHVU;
+	public void setDichVu(DichVuEntity dichVu) {
+		this.dichVu = dichVu;
 	}
 
 }

@@ -23,9 +23,9 @@ public class KhuEntity {
 	
 	@ManyToOne
 	@JoinColumn(name = "MACT")
-	private ChuTroEntity CHUTRO;
+	private ChuTroEntity chuTro;
 	
-	@OneToMany(mappedBy = "KHU", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "khu", fetch = FetchType.EAGER)
 	private Collection<PhongEntity> dsPhong;
 
 	public String getMAKHU() {
@@ -76,14 +76,6 @@ public class KhuEntity {
 		DIACHI = dIACHI;
 	}
 
-	public ChuTroEntity getCHUTRO() {
-		return CHUTRO;
-	}
-
-	public void setCHUTRO(ChuTroEntity cHUTRO) {
-		CHUTRO = cHUTRO;
-	}
-
 	public Collection<PhongEntity> getDsPhong() {
 		return dsPhong;
 	}
@@ -94,6 +86,14 @@ public class KhuEntity {
 
 	public KhuEntity() {
 		super();
+	}
+
+	public ChuTroEntity getChuTro() {
+		return chuTro;
+	}
+
+	public void setChuTro(ChuTroEntity chuTro) {
+		this.chuTro = chuTro;
 	}
 	
 }

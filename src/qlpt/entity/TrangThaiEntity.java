@@ -21,7 +21,7 @@ public class TrangThaiEntity {
 	@Column(name = "TENTT")
 	private String TENTT;
 	
-	@OneToMany(mappedBy = "TRANGTHAI", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "trangThai", fetch = FetchType.EAGER)
 	private Collection<PhongEntity> dsPhong;
 
 	public int getMATT() {
