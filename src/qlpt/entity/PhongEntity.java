@@ -93,5 +93,11 @@ public class PhongEntity implements Serializable{
 	public void setDsCTHopDong(Collection<CTHopDongEntity> dsCTHopDong) {
 		this.dsCTHopDong = dsCTHopDong;
 	}
+
+	@Override
+	public String toString() {
+		return "PhongEntity [MAPHONG=" + MAPHONG + ", SLNGUOITOIDA=" + SLNGUOITOIDA + ", DONGIA=" + DONGIA + ", MOTA="
+				+ MOTA + ", TRANGTHAI=" + TRANGTHAI + ", KHU=" + KHU + "]";
+	}
 	
 }
