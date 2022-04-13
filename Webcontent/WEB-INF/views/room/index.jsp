@@ -65,57 +65,56 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>4</td>
-                        <td>1.000.000</td>
-                        <td>B</td>
-                        <td>Đang trống</td>
-                        <td>Phòng cực đẹp</td>
-                        <td style="text-align: center;"><a href="#"><i class='bx bx-folder-minus' style="font-size: 18px;"></i></a></td>
-                        <td style="text-align: center;"><a href="#"><i class='bx bx-edit' style="font-size: 18px;"></i></a></td>
-                    </tr>
-
+                    <c:forEach var="r" items="${rooms}">
+						<tr>
+							
+							<td>${r.MAPHONG }</td>
+							<td>${r.SLNGUOITOIDA}</td>
+							<td>${r.DONGIA }</td>
+							<td>${r.KHU.TENKHU }</td>
+							<td>${r.TRANGTHAI.TENTT }</td>
+							<td>${r.MOTA }</td>
+							 <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkDelete"><i class='bx bx-folder-minus' style="font-size: 18px;"></i></a></td>
+                        <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkEdit"><i class='bx bx-edit' style="font-size: 18px;"></i></a></td>
+						</tr>
+					</c:forEach>
+    
                     </tbody>
                   </table>
                 
-
-                  <form>
+					<span>${message}</span>
+                  <form:form modelAttribute="room" method="POST">
                     <div class="form-row">
                       <div class="form-group col-4">
                         <label for="soNguoiTD" class="room__label">Số người 1 phòng</label>
-                        <input type="number" class="form-control" id="soNguoiTD" placeholder="Nhập số người tối đa">
+                        <form:input type="number" class="form-control" id="soNguoiTD" placeholder="Nhập số người tối đa" path="SLNGUOITOIDA"/>
                       </div>
                       <div class="form-group col-4">
                         <label for="DonGia" class="room__label">Đơn giá / Tháng
                         </label>
-                        <input type="number" class="form-control" id="DonGia" placeholder="Nhập đơn giá">
+                        <form:input type="number" class="form-control" id="DonGia" placeholder="Nhập đơn giá" path="DONGIA"/>
                       </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="Khu" class="room__label">Khu</label>
-                            <select class="form-control">
-                              <option>Khu 1</option>
-                              <option>Khu 2</option>
-                            </select>
+                            <form:select id="Khu" class="form-control" path="KHU.MAKHU" items="${KhuSelect}" itemLabel="TENKHU" itemValue="MAKHU">
+				      		</form:select>
                         </div>
                         <div class="form-group col-4">
                           <label for="TrangThai" class="room__label">Trạng thái</label>
-                          <select class="form-control">
-                            <option>Đã thuê</option>
-                            <option>Còn trống</option>
-                        </select>
+                          <form:select id="TrangThai" class="form-control" path="TRANGTHAI.MATT" items="${TrangThaiSelect}" itemLabel="TENTT" itemValue="MATT">
+				      		</form:select>
                         </div>
                     </div>
                     <div class="form-row">
                       <div class="form-group col-8">
                         <label for="MoTa" class="room__label">Mô Tả</label>
-                        <textarea class="form-control" id="MoTa" rows="3"></textarea>
+                        <form:textarea class="form-control" id="MoTa" rows="3" path="MOTA"></form:textarea>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-success mt-3"><i class='bx bx-save' style="font-size: 18px;position: relative;top: 2px;"></i> Lưu</button>
-                  </form>
+                    <button type="submit" name="${btnStatus}" class="btn btn-success mt-3"><i class='bx bx-save' style="font-size: 18px;position: relative;top: 2px;"></i> Lưu</button>
+                  </form:form>
 
             </div>
 	</main>

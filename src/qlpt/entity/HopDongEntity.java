@@ -23,10 +23,6 @@ public class HopDongEntity implements Serializable{
 	@JoinColumn(name = "MAKHACH")
 	private KhachThueEntity KHACHTHUE;
 	
-//	@Id
-//	@ManyToOne
-//	@JoinColumn(name ="MAPHONG")
-//	private PhongEntity PHONG;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -42,12 +38,7 @@ public class HopDongEntity implements Serializable{
 	public void setKHACHTHUE(KhachThueEntity kHACHTHUE) {
 		KHACHTHUE = kHACHTHUE;
 	}
-//	public PhongEntity getPHONG() {
-//		return PHONG;
-//	}
-//	public void setPHONG(PhongEntity pHONG) {
-//		PHONG = pHONG;
-//	}
+
 	public Date getNGAYKY() {
 		return NGAYKY;
 	}

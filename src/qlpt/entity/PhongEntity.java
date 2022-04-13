@@ -31,12 +31,7 @@ public class PhongEntity implements Serializable{
 	@JoinColumn(name = "MAKHU")
 	private KhuEntity KHU;
 	
-	@OneToMany(mappedBy = "PHONG", fetch = FetchType.EAGER)
-	private List<CTDichVuEntity> dsCTDichVu;
 
-//	@OneToMany(mappedBy = "PHONG", fetch = FetchType.EAGER)
-//	private List<HopDongEntity> dsHopDong;
-//	
 	public int getMAPHONG() {
 		return MAPHONG;
 	}
@@ -85,21 +80,6 @@ public class PhongEntity implements Serializable{
 		KHU = kHU;
 	}
 
-	public List<CTDichVuEntity> getDsDichVu() {
-		return dsCTDichVu;
-	}
-
-	public void setDsDichVu(List<CTDichVuEntity> dsDichVu) {
-		this.dsCTDichVu = dsDichVu;
-	}
-
-//	public List<HopDongEntity> getDsHopDong() {
-//		return dsHopDong;
-//	}
-//
-//	public void setDsHopDong(List<HopDongEntity> dsHopDong) {
-//		this.dsHopDong = dsHopDong;
-//	}
 
 	public PhongEntity() {
 		super();
