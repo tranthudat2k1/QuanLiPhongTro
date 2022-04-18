@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import qlpt.entity.DichVuEntity;
 import qlpt.entity.KhuEntity;
 import qlpt.entity.PhongEntity;
 import qlpt.entity.TrangThaiEntity;
@@ -144,9 +145,8 @@ public class RoomController {
 	}
 	// Thả dữ liệu vô form
 	@RequestMapping(value = "index/{id}", params = "linkEdit")
-	public String editRoom(ModelMap model,
+	public String editRoom(ModelMap model,@ModelAttribute("room") PhongEntity room,
 			 @PathVariable("id") Integer id) {
-
 		model.addAttribute("btnStatus", "btnEdit");
 		model.addAttribute("room", this.getRoom(id));
 		model.addAttribute("rooms", this.getRooms());

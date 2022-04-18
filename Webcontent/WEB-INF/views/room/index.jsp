@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/includes/header.jsp"%>
+<link
+	href="<c:url value='/resources/assets/bootstrap.min.css' />"
+	rel="stylesheet" />
 <div class="app">
 	<%@include file="/WEB-INF/views/includes/navbar.jsp"%>
 	<div class="pseudo"></div>	
@@ -54,6 +57,8 @@
                 <hr/>
                 <div class="mb-4 d-flex flex-row-reverse">
                     <button type="button" class="btn btn-primary"> <i class='bx bx-plus-medical'></i> Thêm Phòng</button>
+                	<button type="button" class="btn btn-success"> 
+                
                 </div>
                 <table class="table table-striped  table-bordered">
                     <thead>
@@ -74,8 +79,8 @@
 							<td style="width: 7%">${r.MAPHONG }</td>
 							<td style="width: 8%">${r.SLNGUOITOIDA}</td>
 							<td style="width: 15%">${r.DONGIA }</td>
-							<td style="width: 10%">${r.KHU.TENKHU }</td>
-							<td style="width: 10%">${r.TRANGTHAI.TENTT }</td>
+							<td style="width: 10%">${r.khu.TENKHU }</td>
+							<td style="width: 10%">${r.trangThai.TENTT }</td>
 							<td style="width: 30%">${r.MOTA }</td>
 							 <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkDelete"><i class='bx bx-folder-minus' style="font-size: 18px;"></i></a></td>
                         <td style="text-align: center;"><a href="room/index/${r.MAPHONG}.htm?linkEdit"><i class='bx bx-edit' style="font-size: 18px;"></i></a></td>
@@ -101,12 +106,12 @@
                     <div class="form-row">
                         <div class="form-group col-4">
                             <label for="Khu" class="room__label">Khu</label>
-                            <form:select id="Khu" class="form-control" path="KHU.MAKHU" items="${KhuSelect}" itemLabel="TENKHU" itemValue="MAKHU">
+                            <form:select id="Khu" class="form-control" path="khu.MAKHU" items="${KhuSelect}" itemLabel="TENKHU" itemValue="MAKHU">
 				      		</form:select>
                         </div>
                         <div class="form-group col-4">
                           <label for="TrangThai" class="room__label">Trạng thái</label>
-                          <form:select id="TrangThai" class="form-control" path="TRANGTHAI.MATT" items="${TrangThaiSelect}" itemLabel="TENTT" itemValue="MATT">
+                          <form:select id="TrangThai" class="form-control" path="trangThai.MATT" items="${TrangThaiSelect}" itemLabel="TENTT" itemValue="MATT">
 				      		</form:select>
                         </div>
                     </div>

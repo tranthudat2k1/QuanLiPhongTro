@@ -97,7 +97,9 @@ public class PhongEntity implements Serializable{
 	@Override
 	public String toString() {
 		return "PhongEntity [MAPHONG=" + MAPHONG + ", SLNGUOITOIDA=" + SLNGUOITOIDA + ", DONGIA=" + DONGIA + ", MOTA="
-				+ MOTA + ", TRANGTHAI=" + TRANGTHAI + ", KHU=" + KHU + "]";
+				+ MOTA + ", trangThai=" + trangThai + ", khu=" + khu + ", dsCTHopDong=" + dsCTHopDong + "]";
 	}
+
+	
 	
 }

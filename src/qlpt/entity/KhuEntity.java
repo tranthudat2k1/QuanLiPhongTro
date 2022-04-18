@@ -1,7 +1,9 @@
 package qlpt.entity;
 
 import java.util.Collection;
+import java.util.Random;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class KhuEntity {
 	@JoinColumn(name = "MACT")
 	private ChuTroEntity chuTro;
 	
-	@OneToMany(mappedBy = "khu", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "khu",cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Collection<PhongEntity> dsPhong;
 
 	public String getMAKHU() {
@@ -86,6 +88,9 @@ public class KhuEntity {
 
 	public KhuEntity() {
 		super();
+//		Random rd = new Random();
+//		int num = rd.nextInt();
+//		MAKHU = "MK"+ num;
 	}
 
 	public ChuTroEntity getChuTro() {
@@ -94,6 +99,13 @@ public class KhuEntity {
 
 	public void setChuTro(ChuTroEntity chuTro) {
 		this.chuTro = chuTro;
+	}
+
+	@Override
+	public String toString() {
+		return "KhuEntity [MAKHU=" + MAKHU + ", TENKHU=" + TENKHU + ", TINH_TP=" + TINH_TP + ", QUAN_HUYEN="
+				+ QUAN_HUYEN + ", PHUONG_XA=" + PHUONG_XA + ", DIACHI=" + DIACHI + ", chuTro=" + chuTro + ", dsPhong="
+				+ dsPhong + "]";
 	}
 	
 }
