@@ -26,5 +26,6 @@
 <link
 	href="<c:url value='/resources/assets/bootstrap.min.css' />"
 	rel="stylesheet" />
+	
 </head>
 <body>
