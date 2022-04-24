@@ -19,21 +19,43 @@ public class PhongEntity implements Serializable{
 	@Id
 	@GeneratedValue
 	private int MAPHONG;
-	private int SLNGUOITOIDA;
-	private double DONGIA;
-	private String MOTA;
+
+	private String MOTARIENG;
 	
 	@ManyToOne
 	@JoinColumn(name = "MATT")
 	TrangThaiEntity trangThai;
 	
 	@ManyToOne
-	@JoinColumn(name = "MAKHU")
-	private KhuEntity khu;
+	@JoinColumn(name = "MANT")
+	private NhaTroEntity nhatro;
+	
+	@ManyToOne
+	@JoinColumn(name = "MALOAI")
+	private LoaiPhongEntity loaiPhong;
 	
 	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER)
-	Collection<CTHopDongEntity> dsCTHopDong;
+	Collection<HopDongEntity> dsHopDong;
+
+	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER)
+	Collection<BaoTriEntity> dsBaoTri;
 	
+
+	public PhongEntity(int mAPHONG, String mOTARIENG, TrangThaiEntity trangThai, NhaTroEntity nhatro,
+			LoaiPhongEntity loaiPhong, Collection<HopDongEntity> dsHopDong, Collection<BaoTriEntity> dsBaoTri) {
+		super();
+		MAPHONG = mAPHONG;
+		MOTARIENG = mOTARIENG;
+		this.trangThai = trangThai;
+		this.nhatro = nhatro;
+		this.loaiPhong = loaiPhong;
+		this.dsHopDong = dsHopDong;
+		this.dsBaoTri = dsBaoTri;
+	}
+
+	public PhongEntity() {
+		super();
+	}
 
 	public int getMAPHONG() {
 		return MAPHONG;
@@ -43,31 +65,12 @@ public class PhongEntity implements Serializable{
 		MAPHONG = mAPHONG;
 	}
 
-	public int getSLNGUOITOIDA() {
-		return SLNGUOITOIDA;
+	public String getMOTARIENG() {
+		return MOTARIENG;
 	}
 
-	public void setSLNGUOITOIDA(int sLNGUOITOIDA) {
-		SLNGUOITOIDA = sLNGUOITOIDA;
-	}
-
-	public double getDONGIA() {
-		return DONGIA;
-	}
-
-	public void setDONGIA(double dONGIA) {
-		DONGIA = dONGIA;
-	}
-
-	public String getMOTA() {
-		return MOTA;
-	}
-
-	public void setMOTA(String mOTA) {
-		MOTA = mOTA;
-	}
-	public PhongEntity() {
-		super();
+	public void setMOTARIENG(String mOTARIENG) {
+		MOTARIENG = mOTARIENG;
 	}
 
 	public TrangThaiEntity getTrangThai() {
@@ -78,27 +81,38 @@ public class PhongEntity implements Serializable{
 		this.trangThai = trangThai;
 	}
 
-	public KhuEntity getKhu() {
-		return khu;
+	public NhaTroEntity getNhatro() {
+		return nhatro;
 	}
 
-	public void setKhu(KhuEntity khu) {
-		this.khu = khu;
+	public void setNhatro(NhaTroEntity nhatro) {
+		this.nhatro = nhatro;
 	}
 
-	public Collection<CTHopDongEntity> getDsCTHopDong() {
-		return dsCTHopDong;
+	public LoaiPhongEntity getLoaiPhong() {
+		return loaiPhong;
 	}
 
-	public void setDsCTHopDong(Collection<CTHopDongEntity> dsCTHopDong) {
-		this.dsCTHopDong = dsCTHopDong;
+	public void setLoaiPhong(LoaiPhongEntity loaiPhong) {
+		this.loaiPhong = loaiPhong;
 	}
 
-	@Override
-	public String toString() {
-		return "PhongEntity [MAPHONG=" + MAPHONG + ", SLNGUOITOIDA=" + SLNGUOITOIDA + ", DONGIA=" + DONGIA + ", MOTA="
-				+ MOTA + ", trangThai=" + trangThai + ", khu=" + khu + ", dsCTHopDong=" + dsCTHopDong + "]";
+	public Collection<HopDongEntity> getDsHopDong() {
+		return dsHopDong;
 	}
+
+	public void setDsHopDong(Collection<HopDongEntity> dsHopDong) {
+		this.dsHopDong = dsHopDong;
+	}
+
+	public Collection<BaoTriEntity> getDsBaoTri() {
+		return dsBaoTri;
+	}
+
+	public void setDsBaoTri(Collection<BaoTriEntity> dsBaoTri) {
+		this.dsBaoTri = dsBaoTri;
+	}
+	
 
 	
 	

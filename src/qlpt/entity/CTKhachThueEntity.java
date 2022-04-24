@@ -20,8 +20,21 @@ public class CTKhachThueEntity implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "MACTHD")
-	private CTHopDongEntity ctHopDong;
+	@JoinColumn(name = "MAHD")
+	private CTHopDongEntity hopDong;
+
+	private Boolean TRANGTHAI;
+
+	public CTKhachThueEntity(KhachThueEntity khachThue, CTHopDongEntity hopDong, Boolean tRANGTHAI) {
+		super();
+		this.khachThue = khachThue;
+		this.hopDong = hopDong;
+		TRANGTHAI = tRANGTHAI;
+	}
+
+	public CTKhachThueEntity() {
+		super();
+	}
 
 	public KhachThueEntity getKhachThue() {
 		return khachThue;
@@ -31,16 +44,20 @@ public class CTKhachThueEntity implements Serializable{
 		this.khachThue = khachThue;
 	}
 
-	public CTHopDongEntity getCtHopDong() {
-		return ctHopDong;
+	public CTHopDongEntity getHopDong() {
+		return hopDong;
 	}
 
-	public void setCtHopDong(CTHopDongEntity ctHopDong) {
-		this.ctHopDong = ctHopDong;
+	public void setHopDong(CTHopDongEntity hopDong) {
+		this.hopDong = hopDong;
 	}
 
-	public CTKhachThueEntity() {
-		super();
+	public Boolean getTRANGTHAI() {
+		return TRANGTHAI;
+	}
+
+	public void setTRANGTHAI(Boolean tRANGTHAI) {
+		TRANGTHAI = tRANGTHAI;
 	}
 	
 	
