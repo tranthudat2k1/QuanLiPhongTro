@@ -31,4 +31,49 @@ public class QuyDinhEntity implements Serializable{
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date NGAYQD;
+
+	public NhaTroEntity getNhaTro() {
+		return nhaTro;
+	}
+
+	public void setNhaTro(NhaTroEntity nhaTro) {
+		this.nhaTro = nhaTro;
+	}
+
+	public DichVuEntity getDichVu() {
+		return dichVu;
+	}
+
+	public void setDichVu(DichVuEntity dichVu) {
+		this.dichVu = dichVu;
+	}
+
+	public double getDONGIA() {
+		return DONGIA;
+	}
+
+	public void setDONGIA(double dONGIA) {
+		DONGIA = dONGIA;
+	}
+
+	public Date getNGAYQD() {
+		return NGAYQD;
+	}
+
+	public void setNGAYQD(Date nGAYQD) {
+		NGAYQD = nGAYQD;
+	}
+
+	public QuyDinhEntity(NhaTroEntity nhaTro, DichVuEntity dichVu, double dONGIA, Date nGAYQD) {
+		super();
+		this.nhaTro = nhaTro;
+		this.dichVu = dichVu;
+		DONGIA = dONGIA;
+		NGAYQD = nGAYQD;
+	}
+
+	public QuyDinhEntity() {
+		super();
+	}
+	
 }
