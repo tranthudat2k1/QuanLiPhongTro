@@ -1,5 +1,7 @@
 package qlpt.entity;
 
+
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -20,20 +22,20 @@ public class CTKhachThueEntity implements Serializable{
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name = "MAHD")
-	private CTHopDongEntity hopDong;
+	@JoinColumn(name = "MAHOPDONG")
+	private HopDongEntity hopDong;
 
 	private Boolean TRANGTHAI;
 
-	public CTKhachThueEntity(KhachThueEntity khachThue, CTHopDongEntity hopDong, Boolean tRANGTHAI) {
+	public CTKhachThueEntity() {
+		super();
+	}
+
+	public CTKhachThueEntity(KhachThueEntity khachThue, HopDongEntity hopDong, Boolean tRANGTHAI) {
 		super();
 		this.khachThue = khachThue;
 		this.hopDong = hopDong;
 		TRANGTHAI = tRANGTHAI;
-	}
-
-	public CTKhachThueEntity() {
-		super();
 	}
 
 	public KhachThueEntity getKhachThue() {
@@ -44,11 +46,11 @@ public class CTKhachThueEntity implements Serializable{
 		this.khachThue = khachThue;
 	}
 
-	public CTHopDongEntity getHopDong() {
+	public HopDongEntity getHopDong() {
 		return hopDong;
 	}
 
-	public void setHopDong(CTHopDongEntity hopDong) {
+	public void setHopDong(HopDongEntity hopDong) {
 		this.hopDong = hopDong;
 	}
 
@@ -59,6 +61,5 @@ public class CTKhachThueEntity implements Serializable{
 	public void setTRANGTHAI(Boolean tRANGTHAI) {
 		TRANGTHAI = tRANGTHAI;
 	}
-	
-	
+
 }

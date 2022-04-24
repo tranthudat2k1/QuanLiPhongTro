@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class HopDongEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int MAHD;
+	private int MAHOPDONG;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -37,7 +37,7 @@ public class HopDongEntity{
 	private Date THOIHAN;
 	
 	@ManyToOne
-	@JoinColumn(name = "MAKT")
+	@JoinColumn(name = "MAKTDAIDIEN")
 	private KhachThueEntity khachThue;
 	
 	@ManyToOne
@@ -53,32 +53,12 @@ public class HopDongEntity{
 	@OneToMany(mappedBy = "hopDong",fetch = FetchType.EAGER)
 	private Collection<CTKhachThueEntity> dsCTKT;
 
-	public HopDongEntity(int mAHD, Date nGAYKY, double tIENCOC, Boolean dAHUY, Date tHOIHAN, KhachThueEntity khachThue,
-			PhongEntity phong, Collection<HoaDonEntity> dsHoaDon, Collection<CTDichVuEntity> dsCTDichVu,
-			Collection<CTKhachThueEntity> dsCTKT) {
-		super();
-		MAHD = mAHD;
-		NGAYKY = nGAYKY;
-		TIENCOC = tIENCOC;
-		DAHUY = dAHUY;
-		THOIHAN = tHOIHAN;
-		this.khachThue = khachThue;
-		this.phong = phong;
-		this.dsHoaDon = dsHoaDon;
-		this.dsCTDichVu = dsCTDichVu;
-		this.dsCTKT = dsCTKT;
+	public int getMAHOPDONG() {
+		return MAHOPDONG;
 	}
 
-	public HopDongEntity() {
-		super();
-	}
-
-	public int getMAHD() {
-		return MAHD;
-	}
-
-	public void setMAHD(int mAHD) {
-		MAHD = mAHD;
+	public void setMAHOPDONG(int mAHOPDONG) {
+		MAHOPDONG = mAHOPDONG;
 	}
 
 	public Date getNGAYKY() {
@@ -152,7 +132,27 @@ public class HopDongEntity{
 	public void setDsCTKT(Collection<CTKhachThueEntity> dsCTKT) {
 		this.dsCTKT = dsCTKT;
 	}
-	
+
+	public HopDongEntity() {
+		super();
+	}
+
+	public HopDongEntity(int mAHOPDONG, Date nGAYKY, double tIENCOC, Boolean dAHUY, Date tHOIHAN,
+			KhachThueEntity khachThue, PhongEntity phong, Collection<HoaDonEntity> dsHoaDon,
+			Collection<CTDichVuEntity> dsCTDichVu, Collection<CTKhachThueEntity> dsCTKT) {
+		super();
+		MAHOPDONG = mAHOPDONG;
+		NGAYKY = nGAYKY;
+		TIENCOC = tIENCOC;
+		DAHUY = dAHUY;
+		THOIHAN = tHOIHAN;
+		this.khachThue = khachThue;
+		this.phong = phong;
+		this.dsHoaDon = dsHoaDon;
+		this.dsCTDichVu = dsCTDichVu;
+		this.dsCTKT = dsCTKT;
+	}
+
 	
 	
 }
