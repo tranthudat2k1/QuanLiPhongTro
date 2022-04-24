@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -21,33 +23,77 @@ import org.springframework.format.annotation.DateTimeFormat;
 @IdClass(CTDichVuEntity.class)
 public class CTDichVuEntity implements Serializable {
 	@Id
-	@ManyToOne
-	@JoinColumn(name = "MACTHD")
-	private CTHopDongEntity ctHopDong;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer MACTDV;
 	
-	@Id
 	@ManyToOne
 	@JoinColumn(name = "MADV")
 	private DichVuEntity dichVu;
 
-	@Column(name = "THANG" )
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date THANG;
-
-	@Column(name = "CHISOCU" )
+	@ManyToOne
+	@JoinColumn(name = "MAHD")
+	private DichVuEntity hopDong;
+	
+	@ManyToOne
+	@JoinColumn(name = "MATG")
+	private ThoiGianEntity thoiGian;
+	
+	@Column(name = "CSCU" )
 	private int CHISOCU;
 	
-	@Column(name = "CHISOMOI" )
+	@Column(name = "CSMOI" )
 	private int CHISOMOI;
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date NGAYTHONGKE;
 
-	public Date getTHANG() {
-		return THANG;
+	public CTDichVuEntity(Integer mACTDV, DichVuEntity dichVu, DichVuEntity hopDong, ThoiGianEntity thoiGian,
+			int cHISOCU, int cHISOMOI, Date nGAYTHONGKE) {
+		super();
+		MACTDV = mACTDV;
+		this.dichVu = dichVu;
+		this.hopDong = hopDong;
+		this.thoiGian = thoiGian;
+		CHISOCU = cHISOCU;
+		CHISOMOI = cHISOMOI;
+		NGAYTHONGKE = nGAYTHONGKE;
 	}
 
-	public void setTHANG(Date tHANG) {
-		THANG = tHANG;
+	public CTDichVuEntity() {
+		super();
+	}
+
+	public Integer getMACTDV() {
+		return MACTDV;
+	}
+
+	public void setMACTDV(Integer mACTDV) {
+		MACTDV = mACTDV;
+	}
+
+	public DichVuEntity getDichVu() {
+		return dichVu;
+	}
+
+	public void setDichVu(DichVuEntity dichVu) {
+		this.dichVu = dichVu;
+	}
+
+	public DichVuEntity getHopDong() {
+		return hopDong;
+	}
+
+	public void setHopDong(DichVuEntity hopDong) {
+		this.hopDong = hopDong;
+	}
+
+	public ThoiGianEntity getThoiGian() {
+		return thoiGian;
+	}
+
+	public void setThoiGian(ThoiGianEntity thoiGian) {
+		this.thoiGian = thoiGian;
 	}
 
 	public int getCHISOCU() {
@@ -66,26 +112,13 @@ public class CTDichVuEntity implements Serializable {
 		CHISOMOI = cHISOMOI;
 	}
 
-
-	public CTDichVuEntity() {
-		super();
+	public Date getNGAYTHONGKE() {
+		return NGAYTHONGKE;
 	}
 
-
-	public CTHopDongEntity getCtHopDong() {
-		return ctHopDong;
+	public void setNGAYTHONGKE(Date nGAYTHONGKE) {
+		NGAYTHONGKE = nGAYTHONGKE;
 	}
-
-	public void setCtHopDong(CTHopDongEntity ctHopDong) {
-		this.ctHopDong = ctHopDong;
-	}
-
-	public DichVuEntity getDichVu() {
-		return dichVu;
-	}
-
-	public void setDichVu(DichVuEntity dichVu) {
-		this.dichVu = dichVu;
-	}
-
+	
+	
 }

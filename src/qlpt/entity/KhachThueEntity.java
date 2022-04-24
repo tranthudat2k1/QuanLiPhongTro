@@ -23,11 +23,41 @@ public class KhachThueEntity {
 	private String SDT;
 	private String NGHENGHIEP;
 	
-	@OneToMany(mappedBy = "khachThue", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "khachThue",fetch = FetchType.EAGER)
 	private Collection<HopDongEntity> dsHopDong;
+	
+	@OneToMany(mappedBy = "khachKhue",fetch = FetchType.EAGER)
+	private Collection<CTKhachThueEntity> dsCTKT;
 
-	@OneToMany(mappedBy = "khachThue" , fetch=FetchType.EAGER)
-	private Collection<CTKhachThueEntity> dsCTKhachThue;
+	public KhachThueEntity(String mAKT, String hO, String tEN, int nAMSINH, String gIOITINH, String cCCD, String dIACHI,
+			String eMAIL, String sDT, String nGHENGHIEP, Collection<HopDongEntity> dsHopDong,
+			Collection<CTKhachThueEntity> dsCTKT) {
+		super();
+		MAKT = mAKT;
+		HO = hO;
+		TEN = tEN;
+		NAMSINH = nAMSINH;
+		GIOITINH = gIOITINH;
+		CCCD = cCCD;
+		DIACHI = dIACHI;
+		EMAIL = eMAIL;
+		SDT = sDT;
+		NGHENGHIEP = nGHENGHIEP;
+		this.dsHopDong = dsHopDong;
+		this.dsCTKT = dsCTKT;
+	}
+
+	public KhachThueEntity() {
+		super();
+	}
+
+	public String getMAKT() {
+		return MAKT;
+	}
+
+	public void setMAKT(String mAKT) {
+		MAKT = mAKT;
+	}
 
 	public String getHO() {
 		return HO;
@@ -109,25 +139,15 @@ public class KhachThueEntity {
 		this.dsHopDong = dsHopDong;
 	}
 
-	public KhachThueEntity() {
-		super();
+	public Collection<CTKhachThueEntity> getDsCTKT() {
+		return dsCTKT;
 	}
 
-	public String getMAKT() {
-		return MAKT;
-	}
-
-	public void setMAKT(String mAKT) {
-		MAKT = mAKT;
-	}
-
-	public Collection<CTKhachThueEntity> getDsCTKhachThue() {
-		return dsCTKhachThue;
-	}
-
-	public void setDsCTKhachThue(Collection<CTKhachThueEntity> dsCTKhachThue) {
-		this.dsCTKhachThue = dsCTKhachThue;
+	public void setDsCTKT(Collection<CTKhachThueEntity> dsCTKT) {
+		this.dsCTKT = dsCTKT;
 	}
 	
+	
+
 	
 }
