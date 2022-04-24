@@ -26,7 +26,7 @@ public class KhachThueEntity {
 	@OneToMany(mappedBy = "khachThue",fetch = FetchType.EAGER)
 	private Collection<HopDongEntity> dsHopDong;
 	
-	@OneToMany(mappedBy = "khachKhue",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "khachThue",fetch = FetchType.EAGER)
 	private Collection<CTKhachThueEntity> dsCTKT;
 
 	public KhachThueEntity(String mAKT, String hO, String tEN, int nAMSINH, String gIOITINH, String cCCD, String dIACHI,

@@ -22,12 +22,12 @@ public class NhaTroEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="MACT")
-	private ChuTroEntity chutro;
+	private ChuTroEntity chuTro;
 	
 	@OneToMany(mappedBy = "nhatro",fetch = FetchType.EAGER)
 	private Collection<PhongEntity> dsPhong;
 	
-	@OneToMany(mappedBy = "nhatro", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "nhaTro", fetch = FetchType.EAGER)
 	private Collection<QuyDinhEntity> dsQuyDinh;
 
 	public NhaTroEntity(String mANT, String tENNT, String tINH_TP, String qUAN_HUYEN, String pHUONG_XA, String dIACHI,
@@ -39,7 +39,7 @@ public class NhaTroEntity {
 		QUAN_HUYEN = qUAN_HUYEN;
 		PHUONG_XA = pHUONG_XA;
 		DIACHI = dIACHI;
-		this.chutro = chutro;
+		this.chuTro = chutro;
 		this.dsPhong = dsPhong;
 		this.dsQuyDinh = dsQuyDinh;
 	}
@@ -97,11 +97,11 @@ public class NhaTroEntity {
 	}
 
 	public ChuTroEntity getChutro() {
-		return chutro;
+		return chuTro;
 	}
 
 	public void setChutro(ChuTroEntity chutro) {
-		this.chutro = chutro;
+		this.chuTro = chutro;
 	}
 
 	public Collection<PhongEntity> getDsPhong() {

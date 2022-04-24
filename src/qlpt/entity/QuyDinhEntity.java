@@ -1,5 +1,6 @@
 package qlpt.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "QUYDINH")
-public class QuyDinhEntity {
+public class QuyDinhEntity implements Serializable{
 	@Id
 	@ManyToOne
 	@JoinColumn(name="MANT")

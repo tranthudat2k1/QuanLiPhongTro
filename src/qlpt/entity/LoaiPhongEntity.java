@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class LoaiPhongEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer MANT;
+	private Integer MALOAI;
 	
 	private String TENLOAI;
 	private double DIENTICH;
@@ -26,28 +26,12 @@ public class LoaiPhongEntity {
 	@OneToMany(mappedBy = "loaiPhong",fetch = FetchType.EAGER)
 	Collection<PhongEntity> dsPhong;
 
-	public LoaiPhongEntity(Integer mANT, String tENLOAI, double dIENTICH, Integer sLNGUOITD, double dONGIA, String mOTA,
-			Collection<PhongEntity> dsPhong) {
-		super();
-		MANT = mANT;
-		TENLOAI = tENLOAI;
-		DIENTICH = dIENTICH;
-		SLNGUOITD = sLNGUOITD;
-		DONGIA = dONGIA;
-		MOTA = mOTA;
-		this.dsPhong = dsPhong;
+	public Integer getMALOAI() {
+		return MALOAI;
 	}
 
-	public LoaiPhongEntity() {
-		super();
-	}
-
-	public Integer getMANT() {
-		return MANT;
-	}
-
-	public void setMANT(Integer mANT) {
-		MANT = mANT;
+	public void setMALOAI(Integer mALOAI) {
+		MALOAI = mALOAI;
 	}
 
 	public String getTENLOAI() {
@@ -97,6 +81,21 @@ public class LoaiPhongEntity {
 	public void setDsPhong(Collection<PhongEntity> dsPhong) {
 		this.dsPhong = dsPhong;
 	}
-	
-	
+
+	public LoaiPhongEntity(Integer mALOAI, String tENLOAI, double dIENTICH, Integer sLNGUOITD, double dONGIA,
+			String mOTA, Collection<PhongEntity> dsPhong) {
+		super();
+		MALOAI = mALOAI;
+		TENLOAI = tENLOAI;
+		DIENTICH = dIENTICH;
+		SLNGUOITD = sLNGUOITD;
+		DONGIA = dONGIA;
+		MOTA = mOTA;
+		this.dsPhong = dsPhong;
+	}
+
+	public LoaiPhongEntity() {
+		super();
+	}
+
 }

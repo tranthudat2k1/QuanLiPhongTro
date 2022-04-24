@@ -31,7 +31,7 @@ public class HoaDonEntity {
 	private Boolean TRANGTHAI;
 	
 	@ManyToOne
-	@JoinColumn(name="MAHD")
+	@JoinColumn(name="MAHOPDONG")
 	private HopDongEntity hopDong;
 
 	public HoaDonEntity(String mAHOADON, Date nGAYLAP, double tHANHTIEN, float tHUE, double tONGPHUTHU,
