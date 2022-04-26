@@ -2,6 +2,7 @@ package qlpt.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -22,14 +23,15 @@ public class NhaTroEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="MACT")
-	private ChuTroEntity chuTro;
+	private ChuTroEntity chutro;
 	
-	@OneToMany(mappedBy = "nhatro",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "nhatro",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private Collection<PhongEntity> dsPhong;
 	
 	@OneToMany(mappedBy = "nhaTro", fetch = FetchType.EAGER)
 	private Collection<QuyDinhEntity> dsQuyDinh;
 
+	
 	public NhaTroEntity(String mANT, String tENNT, String tINH_TP, String qUAN_HUYEN, String pHUONG_XA, String dIACHI,
 			ChuTroEntity chutro, Collection<PhongEntity> dsPhong, Collection<QuyDinhEntity> dsQuyDinh) {
 		super();
@@ -39,7 +41,7 @@ public class NhaTroEntity {
 		QUAN_HUYEN = qUAN_HUYEN;
 		PHUONG_XA = pHUONG_XA;
 		DIACHI = dIACHI;
-		this.chuTro = chutro;
+		this.chutro = chutro;
 		this.dsPhong = dsPhong;
 		this.dsQuyDinh = dsQuyDinh;
 	}
@@ -97,11 +99,11 @@ public class NhaTroEntity {
 	}
 
 	public ChuTroEntity getChutro() {
-		return chuTro;
+		return chutro;
 	}
 
 	public void setChutro(ChuTroEntity chutro) {
-		this.chuTro = chutro;
+		this.chutro = chutro;
 	}
 
 	public Collection<PhongEntity> getDsPhong() {
@@ -119,6 +121,15 @@ public class NhaTroEntity {
 	public void setDsQuyDinh(Collection<QuyDinhEntity> dsQuyDinh) {
 		this.dsQuyDinh = dsQuyDinh;
 	}
+
+	@Override
+	public String toString() {
+		return "NhaTroEntity [MANT=" + MANT + ", TENNT=" + TENNT + ", TINH_TP=" + TINH_TP + ", QUAN_HUYEN=" + QUAN_HUYEN
+				+ ", PHUONG_XA=" + PHUONG_XA + ", DIACHI=" + DIACHI + ", chutro=" + chutro + ", dsPhong=" + dsPhong
+				+ ", dsQuyDinh=" + dsQuyDinh + "]";
+	}
+
+
 	
 	
 	

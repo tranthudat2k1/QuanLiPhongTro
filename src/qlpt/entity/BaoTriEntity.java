@@ -20,7 +20,7 @@ public class BaoTriEntity {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Integer MABAOTRI;
-	private double CHIPHI;
+	private Double CHIPHI;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date NGAY;

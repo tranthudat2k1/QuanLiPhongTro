@@ -24,7 +24,7 @@ public class ChuTroEntity {
 	private String TAIKHOAN;
 	private String PASSWORD;
 	
-	@OneToMany(mappedBy = "chuTro", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "chutro", fetch = FetchType.EAGER)
 	private Collection<NhaTroEntity> dsNhaTro;
 
 	public ChuTroEntity(String mACT, String hO, String tEN, int nAMSINH, String gIOITINH, String cCCD, String dIACHI,

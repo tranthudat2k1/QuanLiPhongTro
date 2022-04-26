@@ -9,13 +9,14 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import qlpt.entity.DichVuEntity;
-import qlpt.entity.KhuEntity;
+import qlpt.entity.NhaTroEntity;
 import qlpt.entity.PhongEntity;
 import qlpt.entity.TrangThaiEntity;
 
@@ -31,11 +32,16 @@ public class RoomController {
 	{
 		List<PhongEntity> rooms = this.getRooms();
 		model.addAttribute("rooms",rooms);
-		model.addAttribute("btnStatus","btnAdd");
-		
+		model.addAttribute("formHide",null);
 		return "room/index";
 	}
-	
+	@RequestMapping(value="index",params="linkAdd")
+	public String redirectLinkAdd(ModelMap model,@ModelAttribute("room") PhongEntity room)
+	{
+		model.addAttribute("btnStatus","btnAdd");
+		model.addAttribute("formHide",1);
+		return "room/index";
+	}
 	public List<PhongEntity> getRooms() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM PhongEntity";
@@ -43,14 +49,22 @@ public class RoomController {
 		List<PhongEntity> list = query.list();
 		return list;
 	}
-	
+	public List<PhongEntity> getRooms(int page) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM PhongEntity p ORDER BY p.MAPHONG DESC";
+		Query query = session.createQuery(hql);
+		query.setFirstResult(page);
+		query.setMaxResults(page+5);
+		List<PhongEntity> list = query.list();
+		return list;
+	}
 	@ModelAttribute("KhuSelect")
-	public List<KhuEntity> getKhus()
+	public List<NhaTroEntity> getNhaTros()
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM KhuEntity";
+		String hql = "FROM NhaTroEntity";
 		Query query = session.createQuery(hql);
-		List<KhuEntity> list = query.list();
+		List<NhaTroEntity> list = query.list();
 
 		return list;
 	}
@@ -61,6 +75,16 @@ public class RoomController {
 	{
 		Session session = factory.getCurrentSession();
 		String hql = "FROM TrangThaiEntity";
+		Query query = session.createQuery(hql);
+		List<TrangThaiEntity> list = query.list();
+		return list;
+	}
+	
+	@ModelAttribute("LoaiPhongSelect")
+	public List<TrangThaiEntity> getLoaiPhongg()
+	{
+		Session session = factory.getCurrentSession();
+		String hql = "FROM LoaiPhongEntity";
 		Query query = session.createQuery(hql);
 		List<TrangThaiEntity> list = query.list();
 		return list;
@@ -83,18 +107,22 @@ public class RoomController {
 		return 1;
 	}
 	@RequestMapping(value = "index", params = "btnAdd")
-	public String addRoom(@ModelAttribute("room") PhongEntity room,ModelMap model)
+	public String addRoom(@ModelAttribute("room") PhongEntity room,ModelMap model,BindingResult errors)
 	{
-		System.out.println(room.toString());
+		if(room.getMOTARIENG().trim().length() == 0)
+		{
+			System.out.println("Điền thiếu !!!");
+			errors.rejectValue("MOTARIENG","PhongEntity","Mô tả cho từng phòng không được bỏ trống !");
+			model.addAttribute("rooms",this.getRooms());
+			return "room/index";
+		}
 		Integer temp = this.insertRoom(room);
 		if(temp != 0)
 				model.addAttribute("message", "Thêm thành công");
 		else
 			model.addAttribute("message", "Thêm thất bại!");
 		model.addAttribute("rooms",this.getRooms());
-		room.setSLNGUOITOIDA(0);
-		room.setDONGIA(0);
-		room.setMOTA("");
+
 		return "room/index";
 	}
 	// Finish add room
@@ -108,85 +136,88 @@ public class RoomController {
 
 		return list;
 	}
-	public Integer updateRoom(PhongEntity room) {
-		System.out.println(room.toString());
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-
-		try {
-			session.update(room);
-			t.commit();
-		} catch (Exception e) {
-			System.out.println("LỖi : "+e.toString());
-			t.rollback();
-			return 0;
-		} finally {
-			session.close();
-		}
-		return 1;
-	}
-	// lưu thay đổi
+	
 	@RequestMapping(value = "index", params = "btnEdit")
 	public String edit_Room(ModelMap model,
 			@ModelAttribute("room") PhongEntity room) {
-
-		Integer temp = this.updateRoom(room);
 		
-		System.out.println(temp);
-		if (temp != 0) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			System.out.println(room.getMAPHONG());
+			String hql = "update PhongEntity set MOTARIENG = :motarieng, MATT = :matt, MANT = :mant, MALOAI = :maloai where MAPHONG = "
+					+ String.valueOf(room.getMAPHONG());
+			Query query = session.createQuery(hql);
+			query.setParameter("motarieng", room.getMOTARIENG());
+			query.setParameter("matt",room.getTrangThai().getMATT());
+			query.setParameter("mant",room.getNhatro().getMANT());
+			query.setParameter("maloai", room.getLoaiPhong().getMALOAI());
+			int a = query.executeUpdate();
 			model.addAttribute("message", "Update thành công");
-		} else {
+			t.commit();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			t.rollback();
+			e.printStackTrace();
 			model.addAttribute("message", "Update thất bại!");
 		}
+		finally
+		{
+			session.close();
+		}
+
 
 		 model.addAttribute("rooms", this.getRooms());
 
 		return "room/index";
 	}
+
+	
 	// Thả dữ liệu vô form
 	@RequestMapping(value = "index/{id}", params = "linkEdit")
-	public String editRoom(ModelMap model,@ModelAttribute("room") PhongEntity room,
+	public String editRoom(ModelMap model,
 			 @PathVariable("id") Integer id) {
 		model.addAttribute("btnStatus", "btnEdit");
 		model.addAttribute("room", this.getRoom(id));
 		model.addAttribute("rooms", this.getRooms());
-
+		model.addAttribute("formHide",1);
 		return "room/index";
 	}
 	//Finish Edit room
-	
 	// DELETE ROOM
-	public Integer deleteRoom(PhongEntity room) {
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-		System.out.println(room.toString());
-		try {
-			session.delete(room);
-			t.commit();
-		} catch (Exception e) {
-			t.rollback();
-			return 0;
-		} finally {
-			session.close();
-		}
-		return 1;
-	}
 	
 	@RequestMapping(value = "/index/{id}.htm", params = "linkDelete")
-	public String deleteRoom( ModelMap model, @ModelAttribute("room") PhongEntity room,
-			@PathVariable("id") Integer id) {
-		 
-		Integer temp = this.deleteRoom(this.getRoom(id));
-		System.out.println(temp);
-		if (temp != 0) {
-			model.addAttribute("message", "Delete thành công");
-		} else {
-			model.addAttribute("message", "Delete thất bại!");
+	public String delete(@PathVariable("id") int id, ModelMap model,@ModelAttribute("room") PhongEntity room) {	
+		System.out.println("check");		
+		Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+        String hql = "FROM PhongEntity where MAPHONG = :id";	
+		try {
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		PhongEntity room1 = (PhongEntity) query.list().get(0);
+		session.delete(room1);
+		t.commit();
+		String success = "Xóa thành công phòng "+id+" !";
+		model.addAttribute("message", success);
+		
 		}
-		
+		catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+			e.printStackTrace();
+			t.rollback();
+			String failure = "Xóa thất bại phòng "+id+" !";
+			model.addAttribute("message", failure);
+
+		}finally {
+			session.close();
+		}
 		model.addAttribute("rooms", this.getRooms());
-		
 		return "room/index";
+		
+
 	}
 	// FINISH DELETE ROOM
 }
