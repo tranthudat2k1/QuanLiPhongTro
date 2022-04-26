@@ -72,8 +72,8 @@
 							<div class="col mb-3">
 								Nhà: <select class="form-select">
 									<option selected>Tất cả</option>
-									<c:forEach items="${dsKhu}" var="k">
-										<option value="${k.getMAKHU()}">${k.getTENKHU()}</option>
+									<c:forEach items="${dsNhaTro}" var="k">
+										<option value="${k.getMANT()}">${k.getTENNT()}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -99,7 +99,7 @@
 								</tr>
 							</thead>
 							<tbody id="table_services">
-								<c:forEach items="${dsCTDichVu}" var="dv">
+								<%-- <c:forEach items="${dsCTDichVu}" var="dv">
 									<tr>
 										<td>${dv.getPHONG().getKHU().getTENKHU()}</td>
 										<td>${dv.getPHONG().getMAPHONG()}</td>
@@ -117,7 +117,7 @@
 											style="width: 100%; text-align: right;"></td>
 										<td>${dv.getCHISOMOI()- dv.getCHISOCU()}</td>
 									</tr>
-								</c:forEach>
+								</c:forEach> --%>
 							</tbody>
 						</table>
 						<br>

@@ -76,4 +76,5 @@ public class QuyDinhEntity implements Serializable{
 		super();
 	}
 	
+	
 }

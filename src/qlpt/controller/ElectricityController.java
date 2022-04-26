@@ -19,7 +19,7 @@ import qlpt.entity.CTDichVuEntity;
 import qlpt.entity.DichVuEntity;
 import qlpt.entity.HopDongEntity;
 import qlpt.entity.KhachThueEntity;
-import qlpt.entity.KhuEntity;
+import qlpt.entity.NhaTroEntity;
 import qlpt.entity.PhongEntity;
 import qlpt.entity.TrangThaiEntity;
 
@@ -34,8 +34,8 @@ public class ElectricityController {
 	public String index(ModelMap model) {
 		model.addAttribute("dsCTDichVu", getCTDichVu());
 		model.addAttribute("dsTrangThai", getDsTrangThai());
-		model.addAttribute("dsKhu",getDsKhu());
-		return "electricity/index";
+		model.addAttribute("dsNhaTro",getDSNhaTro());
+		return "electricity/index1";
 	}
 
 	public List<TrangThaiEntity> getDsTrangThai() {
@@ -69,12 +69,12 @@ public class ElectricityController {
 		List<KhachThueEntity> dsKhachThue = query.list();
 		return dsKhachThue;
 	}
-	public List<KhuEntity> getDsKhu(){
+	public List<NhaTroEntity> getDSNhaTro(){
 		Session session = factory.getCurrentSession();
-		String hql = "FROM KhuEntity";
+		String hql = "FROM NhaTroEntity";
 		Query query = session.createQuery(hql);
-		List<KhuEntity> dsKhu = query.list();
-		return dsKhu;
+		List<NhaTroEntity> dsNhaTro = query.list();
+		return dsNhaTro;
 	}
 	
 	@RequestMapping(value = "save")
@@ -92,7 +92,7 @@ public class ElectricityController {
 			session.close();
 		}
 		model.addAttribute("dsCTDichVu", getCTDichVu());
-		return "electricity/index";
+		return "electricity/index1";
 	}
 
 //	Tạo mã hóa đơn ngẫu nhiên

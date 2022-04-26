@@ -1,6 +1,7 @@
 package qlpt.entity;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,12 +29,12 @@ public class DichVuEntity{
 	private String DONVITINH;
 	
 	@OneToMany(mappedBy = "dichVu", fetch = FetchType.EAGER)
-	private Collection<QuyDinhEntity> dsQuyDinh;
+	private List<QuyDinhEntity> dsQuyDinh;
 
 	@OneToMany(mappedBy = "dichVu", fetch = FetchType.EAGER)
 	private Collection<CTDichVuEntity> dsCT;
 
-	public DichVuEntity(int mADV, String tENDV, String mOTA, String dONVITINH, Collection<QuyDinhEntity> dsQuyDinh,
+	public DichVuEntity(int mADV, String tENDV, String mOTA, String dONVITINH, List<QuyDinhEntity> dsQuyDinh,
 			Collection<CTDichVuEntity> dsCT) {
 		super();
 		MADV = mADV;
@@ -80,11 +81,11 @@ public class DichVuEntity{
 		DONVITINH = dONVITINH;
 	}
 
-	public Collection<QuyDinhEntity> getDsQuyDinh() {
+	public List<QuyDinhEntity> getDsQuyDinh() {
 		return dsQuyDinh;
 	}
 
-	public void setDsQuyDinh(Collection<QuyDinhEntity> dsQuyDinh) {
+	public void setDsQuyDinh(List<QuyDinhEntity> dsQuyDinh) {
 		this.dsQuyDinh = dsQuyDinh;
 	}
 
@@ -95,6 +96,13 @@ public class DichVuEntity{
 	public void setDsCT(Collection<CTDichVuEntity> dsCT) {
 		this.dsCT = dsCT;
 	}
-	
+	public int getQuyDinh(String maNT) {
+		for(int i=0;i<dsQuyDinh.size();i++) {
+			if(dsQuyDinh.get(i).getNhaTro().getMANT().equals(maNT)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 	
 }

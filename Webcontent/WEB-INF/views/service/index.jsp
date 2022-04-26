@@ -7,17 +7,16 @@
 <div class="app">
 	<%@include file="/WEB-INF/views/includes/navbar.jsp"%>
 
-	<main class="container">
-		<div class="row justify-content-md-center">
+	<main class="main">
 			<div class="pseudo"></div>
 			<div class="content__header">
 				<i class='bx bx-menu'></i>
 			</div>
 			<hr>
 			<div class="row">
-				<div class="box" style="height: auto;">
+				<div class="box">
 					<div class="box__title">
-						<div class="d-md-flex" style="justify-content: space-between;">
+						<div class="d-md-flex">
 							<h2>Danh sách dịch vụ</h2>
 							<div>
 								<button onclick="location.href='service/create.htm'"
@@ -103,7 +102,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</main>
 </div>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

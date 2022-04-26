@@ -14,7 +14,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import qlpt.entity.DichVuEntity;
+import qlpt.entity.NhaTroEntity;
+import qlpt.entity.QuyDinhEntity;
 
 @Transactional
 @Controller
@@ -23,11 +27,40 @@ public class ServiceController {
 	@Autowired
 	SessionFactory factory;
 
-	@RequestMapping(value = "index")
+	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String index(ModelMap model) {
+		List<DichVuEntity> services = getServices();model.addAttribute("services", services);
+		model.addAttribute("cbNhaTro", getNhaTro());
+		model.addAttribute("nhatro", new NhaTroEntity());
+		return "service/index1";
+	}
+	@RequestMapping(value = "index", method = RequestMethod.POST)
+	public String index1(ModelMap model, @ModelAttribute("nhatro") NhaTroEntity nhaTro) {
 		List<DichVuEntity> services = getServices();
-		model.addAttribute("services", services);
-		return "service/index";
+		/*
+		 * //dv.getDsQuyDinh().get(dv.getQuyDinh('${MANT}'
+		 * System.out.println(nhTro.getMANT()); List<QuyDinhEntity> dsQuyDInh=
+		 * services.get(0).getDsQuyDinh(); for(QuyDinhEntity q:dsQuyDInh) {
+		 * System.out.println(q.getDichVu().getMADV() + " "+ q.getNhaTro().getMANT()); }
+		 * System.out.println(services.get(0).getQuyDinh(nhTro.getMANT()));
+		 * System.out.println(services.get(0).getDsQuyDinh().get(services.get(0).
+		 * getQuyDinh(nhTro.getMANT())));
+		 */
+//		System.out.println("Nha tro la: " + nhaTro.getMANT());
+//		model.addAttribute("services", services);
+//		model.addAttribute("nhaTros", getNhaTro());
+//		model.addAttribute("MANT", nhaTro.getMANT());
+		System.out.println(nhaTro.getMANT());
+		model.addAttribute("mant",nhaTro.getMANT());
+		return "service/index1";
+	}
+	
+	public List<NhaTroEntity> getNhaTro(){
+		Session session = factory.getCurrentSession();
+		String hql = "FROM NhaTroEntity";
+		Query query = session.createQuery(hql);
+		List<NhaTroEntity> nhaTros = query.list();
+		return nhaTros;
 	}
 
 	/* Get Service */
@@ -53,7 +86,7 @@ public class ServiceController {
 	public String create(ModelMap model, @ModelAttribute("service") DichVuEntity service) {
 		model.addAttribute("btnStatus", "btnAdd");
 		model.addAttribute("title", "Thêm dịch vụ");
-		return "service/create";
+		return "service/create1";
 	}
 
 	@RequestMapping(value = "create", params = "btnAdd")
@@ -71,7 +104,7 @@ public class ServiceController {
 			session.close();
 		}
 		model.addAttribute("services", getServices());
-		return "service/index";
+		return "service/index1";
 	}
 
 	/* Update Service */
@@ -81,7 +114,7 @@ public class ServiceController {
 		model.addAttribute("service", getService(MADV));
 		model.addAttribute("btnStatus", "btnUpdate");
 		model.addAttribute("title", "Sửa dịch vụ");
-		return "service/create";
+		return "service/create1";
 	}
 
 	@RequestMapping(value = "create", params = "btnUpdate")
@@ -93,7 +126,7 @@ public class ServiceController {
 			model.addAttribute("message", "Sửa thất bại!");
 		}
 		model.addAttribute("services", getServices());
-		return "service/index";
+		return "service/index1";
 	}
 
 	public int update(DichVuEntity dv) {
@@ -129,7 +162,7 @@ public class ServiceController {
 			session.close();
 		}
 		model.addAttribute("services", getServices());
-		return "service/index";
+		return "service/index1";
 	}
 
 	/* Search Service */
@@ -147,6 +180,6 @@ public class ServiceController {
 		System.out.print("Vao ham search");
 		List<DichVuEntity> services = searchServices(request.getParameter("searchInput"));
 		model.addAttribute("services", services);
-		return "service/index";
+		return "service/index1";
 	}
 }
