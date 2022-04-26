@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class PhongEntity implements Serializable{
 	@JoinColumn(name = "MALOAI")
 	private LoaiPhongEntity loaiPhong;
 	
-	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	Collection<HopDongEntity> dsHopDong;
 
 	@OneToMany(mappedBy = "phong", fetch = FetchType.EAGER)
