@@ -59,10 +59,16 @@
 					<div class="alert alert-primary" role="alert">${message}</div>
 				</c:if>
 				<div class="mb-4 d-flex flex-row-reverse">
-					<a href="room/index.htm?linkAdd">
-						<button type="button" class="btn btn-primary">
-							<i class='bx bx-plus-medical'></i> Thêm Phòng
-						</button>
+					<div class="ml-2">
+						<a href="room/index.htm?linkAdd">
+							<button type="button" class="btn btn-primary">
+								<i class='bx bx-plus-medical'></i> Thêm Phòng
+							</button>
+						</a>
+					</div>
+					<a href="room/typeroom/index.htm">
+						<button type="button" class="btn btn-success">Xem Loại
+							Phòng</button>
 					</a>
 				</div>
 
@@ -101,14 +107,16 @@
 				</table>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+		
 						<li class="page-item  active"><a class="page-link"
-							href="room/index.htm?page=1">1</a></li>
+							href="room/index.htm?page=1">First</a></li>
 						<li class="page-item"><a class="page-link"
-							href="room/index.htm?page=2">2</a></li>
+							href="room/index.htm?page=2"> < Prev</a></li>
 						<li class="page-item"><a class="page-link"
-							href="room/index.htm?page=3">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+							href="room/index.htm?page=2">Next > </a></li>
+						<li class="page-item"><a class="page-link"
+							href="room/index.htm?page=3">Last</a></li>
+	
 					</ul>
 				</nav>
 			</c:if>

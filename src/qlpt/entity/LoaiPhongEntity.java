@@ -2,6 +2,7 @@ package qlpt.entity;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class LoaiPhongEntity {
 	private double DONGIA;
 	private String MOTA;
 	
-	@OneToMany(mappedBy = "loaiPhong",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "loaiPhong",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
 	Collection<PhongEntity> dsPhong;
 
 	public Integer getMALOAI() {
