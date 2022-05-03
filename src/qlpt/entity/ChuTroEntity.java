@@ -44,6 +44,26 @@ public class ChuTroEntity {
 		this.dsNhaTro = dsNhaTro;
 	}
 
+	public ChuTroEntity(String tAIKHOAN, String pASSWORD) {
+		super();
+		TAIKHOAN = tAIKHOAN;
+		PASSWORD = pASSWORD;
+	}
+	
+	
+
+
+	public ChuTroEntity(String mACT, String hO, String tEN, String sDT, String tAIKHOAN, String pASSWORD,String eMAIL) {
+		super();
+		MACT = mACT;
+		HO = hO;
+		TEN = tEN;
+		SDT = sDT;
+		TAIKHOAN = tAIKHOAN;
+		PASSWORD = pASSWORD;
+		EMAIL = eMAIL;
+	}
+
 	public ChuTroEntity() {
 		super();
 	}
@@ -142,6 +162,13 @@ public class ChuTroEntity {
 
 	public void setDsNhaTro(Collection<NhaTroEntity> dsNhaTro) {
 		this.dsNhaTro = dsNhaTro;
+	}
+
+	@Override
+	public String toString() {
+		return "ChuTroEntity [MACT=" + MACT + ", HO=" + HO + ", TEN=" + TEN + ", NAMSINH=" + NAMSINH + ", GIOITINH="
+				+ GIOITINH + ", CCCD=" + CCCD + ", DIACHI=" + DIACHI + ", EMAIL=" + EMAIL + ", SDT=" + SDT
+				+ ", TAIKHOAN=" + TAIKHOAN + ", PASSWORD=" + PASSWORD + ", dsNhaTro=" + dsNhaTro + "]";
 	}
 	
 	

@@ -10,6 +10,16 @@
 				<i class='bx bx-menu'></i>
 			</div>
 			<hr />
+			<c:choose>
+				<c:when test="${ sessionScope.mact != null}">
+					<p>Đã đăng nhập ${mact }</p>
+				</c:when>
+				<c:otherwise>
+					<p>Chưa đăng nhập</p>
+				</c:otherwise>
+			</c:choose>
+			
+			
 			<div class="row">
 				<div class="c-6">
 					<div class="box">

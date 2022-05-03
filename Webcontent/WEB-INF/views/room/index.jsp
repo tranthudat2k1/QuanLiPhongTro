@@ -9,6 +9,14 @@
 	<main class="container">
 
 		<div class="room">
+		<c:choose>
+				<c:when test="${ sessionScope.mact != null}">
+					<p>Đã đăng nhập ${mact }</p>
+				</c:when>
+				<c:otherwise>
+					<p>Chưa đăng nhập</p>
+				</c:otherwise>
+			</c:choose>
 			<c:if test="${formHide != null }">
 				<form:form modelAttribute="room" method="POST"
 					action="room/index.htm">
@@ -108,14 +116,10 @@
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
 		
-						<li class="page-item  active"><a class="page-link"
-							href="room/index.htm?page=1">First</a></li>
 						<li class="page-item"><a class="page-link"
-							href="room/index.htm?page=2"> < Prev</a></li>
+							href="room/index.htm?page=${ page - 1 }"> < Prev</a></li>
 						<li class="page-item"><a class="page-link"
-							href="room/index.htm?page=2">Next > </a></li>
-						<li class="page-item"><a class="page-link"
-							href="room/index.htm?page=3">Last</a></li>
+							href="room/index.htm?page=${page + 1 }">Next > </a></li>
 	
 					</ul>
 				</nav>

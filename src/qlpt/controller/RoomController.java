@@ -1,6 +1,9 @@
 package qlpt.controller;
 
+import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import qlpt.entity.DichVuEntity;
 import qlpt.entity.LoaiPhongEntity;
@@ -29,11 +33,23 @@ public class RoomController {
 	@Autowired
 	SessionFactory factory;
 	@RequestMapping("index")
-	public String index(ModelMap model,@ModelAttribute("room") PhongEntity room)
+	public String index(ModelMap model,@ModelAttribute("room") PhongEntity room,@RequestParam("page") Integer page)
 	{
-		List<PhongEntity> rooms = this.getRooms();
+		List<PhongEntity> rooms = this.getRooms(page,6);
 		model.addAttribute("rooms",rooms);
 		model.addAttribute("formHide",null);
+		if(page + 1 <= this.getRooms().size() / 6 && page >= 0)
+		{
+			model.addAttribute("page",page);
+		}else
+		{
+			model.addAttribute("page",-1);
+		}
+		if(page == 0)
+		{
+			System.out.println(this.getRooms().size() / 6 + 1);
+			model.addAttribute("page",this.getRooms().size() / 6 + 1);
+		}
 		return "room/index";
 	}
 	@RequestMapping(value="index",params="linkAdd")
@@ -50,12 +66,12 @@ public class RoomController {
 		List<PhongEntity> list = query.list();
 		return list;
 	}
-	public List<PhongEntity> getRooms(int page) {
+	public List<PhongEntity> getRooms(int page,int amount) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM PhongEntity p ORDER BY p.MAPHONG DESC";
 		Query query = session.createQuery(hql);
-		query.setFirstResult(page);
-		query.setMaxResults(page+5);
+		query.setFirstResult(page*amount);
+		query.setMaxResults(amount);
 		List<PhongEntity> list = query.list();
 		return list;
 	}

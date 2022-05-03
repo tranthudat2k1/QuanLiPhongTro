@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+
 <div class="cus_navbar">
 	<div class="cus_header">
 		<h1>QUẢN LÝ NHÀ TRỌ</h1>
@@ -11,14 +11,17 @@
 		<a class="navbar__func-item active" href="home/index.htm"> <i
 			class="bx bx-home-alt"></i>
 			<p>Trang chủ</p>
-		</a> <a class="navbar__func-item" href="room/index.htm"> <i class="bx bx-building-house"></i>
+		</a> <a class="navbar__func-item" href="room/index.htm?page=0"> <i
+			class="bx bx-building-house"></i>
 			<p>Phòng</p>
-				</a> <a class="navbar__func-item" href="area/index.htm"> <i class="bx bx-building-house"></i>
+		</a> <a class="navbar__func-item" href="area/index.htm"> <i
+			class="bx bx-building-house"></i>
 			<p>Nhà trọ</p>
 		</a> <a href="service/index.htm" class="navbar__func-item"> <i
 			class="bx bxl-sketch"></i>
 			<p>Dịch vụ</p>
-		</a> <a href="electricity/index.htm" class="navbar__func-item"> <i class="bx bx-cloud-lightning"></i>
+		</a> <a href="electricity/index.htm" class="navbar__func-item"> <i
+			class="bx bx-cloud-lightning"></i>
 			<p>Chỉ số Điện</p>
 		</a> <a class="navbar__func-item"> <i class="bx bx-water"></i>
 			<p>Chỉ số nước</p>
@@ -40,7 +43,8 @@
 			<i class="bx bx-zoom-in"></i>
 		</div>
 		<div class="footer__item">
-			<i class="bx bx-log-in-circle"></i>
+			<a href="login/logout.htm"> <i class="bx bx-log-in-circle"></i>
+			</a>
 		</div>
 		<div class="footer__item">
 			<i class="bx bxs-key"></i>
