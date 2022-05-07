@@ -78,7 +78,6 @@ public class AreaController{
 		Query query = session.createQuery(hql);
 		query.setParameter("MACT",id);
 		ChuTroEntity nt = (ChuTroEntity) query.list().get(0);
-		System.out.println(nt.toString());
 		return nt;
 	}
 	
@@ -100,7 +99,7 @@ public class AreaController{
 	public Integer insertArea(NhaTroEntity area) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
-		System.out.println(area.toString());
+
 		try {
 			session.save(area);
 			t.commit();
@@ -152,6 +151,7 @@ public class AreaController{
 //			query.setParameter("diachi", area.getDIACHI());
 //			query.setParameter("mact", area.getChutro().getMACT());
 //			int a = query.executeUpdate();
+			area.setChutro(this.getCT(mact));
 			session.update(area);
 			model.addAttribute("message", "Update thành công");
 			t.commit();
@@ -176,7 +176,7 @@ public class AreaController{
 	{
 		model.addAttribute("btnStatus", "btnEdit");
 		model.addAttribute("area", this.getArea(id));
-		model.addAttribute("areas", this.getAreas());
+//		model.addAttribute("areas", this.getAreas());
 		model.addAttribute("formHide",1);
 		return "area/index";
 	}
