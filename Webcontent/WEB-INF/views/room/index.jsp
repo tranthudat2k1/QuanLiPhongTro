@@ -48,7 +48,7 @@
 						<div class="form-group col-8">
 							<label for="MoTa" class="room__label">Mô Tả Riêng</label>
 							<form:textarea class="form-control" id="MoTa" rows="3"
-								path="MOTARIENG"></form:textarea>
+								path="MOTARIENG" value="Phòng ngonnnnn"></form:textarea>
 							<form:errors path="MOTARIENG" />
 						</div>
 					</div>

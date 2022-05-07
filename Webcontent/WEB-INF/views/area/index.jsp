@@ -108,7 +108,7 @@
 								placeholder="Nhập Phường / Xã" path="PHUONG_XA" />
 						</div>
 					</div>
-				 	<div class="form-group col-8">
+				 	<div class="form-group col-8" style="display: none">
 						<label for="chuTro" class="room__label">Chủ Trọ</label>
 						<form:select id="chuTro" class="form-control" path="chutro.MACT"
 							items="${ChuTroSelect}" itemLabel="TEN" itemValue="MACT">

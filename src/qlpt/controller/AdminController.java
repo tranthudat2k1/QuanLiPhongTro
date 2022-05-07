@@ -54,7 +54,8 @@ public class AdminController {
 			try {
 				session = request.getSession();
 				session.setAttribute("mact", MACT);
-	            response.sendRedirect(request.getContextPath() + "/home/index.htm");
+				String url = "/home/"+"index.htm";
+	            response.sendRedirect(request.getContextPath() + url);
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();	

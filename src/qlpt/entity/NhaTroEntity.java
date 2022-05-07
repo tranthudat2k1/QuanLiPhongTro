@@ -25,7 +25,7 @@ public class NhaTroEntity {
 	@JoinColumn(name="MACT")
 	private ChuTroEntity chutro;
 	
-	@OneToMany(mappedBy = "nhatro",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "nhatro",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Collection<PhongEntity> dsPhong;
 	
 	@OneToMany(mappedBy = "nhaTro", fetch = FetchType.EAGER)

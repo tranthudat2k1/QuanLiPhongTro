@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -31,11 +32,14 @@ public class AreaController{
 	@Autowired
 	SessionFactory factory;
 	
+	public String mact;
+	
 	@RequestMapping("index")
-	public String index(ModelMap model,@ModelAttribute("area") NhaTroEntity area )
+	public String index(ModelMap model,@ModelAttribute("area") NhaTroEntity area,HttpSession ss )
 	{
+		mact = ss.getAttribute("mact").toString();
 		
-		List<NhaTroEntity> areas = this.getAreas();
+		List<NhaTroEntity> areas = this.getAreas(mact);
 		model.addAttribute("areas",areas);
 
 		model.addAttribute("formHide",null);
@@ -51,20 +55,31 @@ public class AreaController{
 	// GET AREA
 	public List<NhaTroEntity> getAreas() {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM NhaTroEntity";
-		Query query = session.createQuery(hql);
-		List<NhaTroEntity> list = query.list();
+	
 
+		String hql = "FROM NhaTroEntity WHERE MACT = :mact";
+		Query query = session.createQuery(hql);
+		query.setParameter("mact", mact);
+		List<NhaTroEntity> list = query.list();
 		return list;
 	}
-	public List<NhaTroEntity> getCT(String id) {
+	public List<NhaTroEntity> getAreas(String mact) {
 		Session session = factory.getCurrentSession();
-		String hql = "FROM NhaTroEntity as nt INNER JOIN ChuTroEntity as ct where nt.MACT=ct.MACT AND nt.MANT = :id";
+		String hql = "FROM NhaTroEntity WHERE MACT = :mact";
 		Query query = session.createQuery(hql);
-		query.setParameter("id",id);
+		query.setParameter("mact", mact);
 		List<NhaTroEntity> list = query.list();
 		return list;
-		
+	}
+	public ChuTroEntity getCT(String id) {
+		System.out.println("checker chutroentity"+id);
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ChuTroEntity WHERE MACT = :MACT";
+		Query query = session.createQuery(hql);
+		query.setParameter("MACT",id);
+		ChuTroEntity nt = (ChuTroEntity) query.list().get(0);
+		System.out.println(nt.toString());
+		return nt;
 	}
 	
 	public NhaTroEntity getArea(String id) {
@@ -78,15 +93,6 @@ public class AreaController{
 		return list;
 	}
 	
-	@ModelAttribute("ChuTroSelect")
-	public List<ChuTroEntity> selectChuTro()
-	{
-		Session session = factory.getCurrentSession();
-		String hql = "FROM ChuTroEntity";
-		Query query = session.createQuery(hql);
-		List<ChuTroEntity> list = query.list();
-		return list;
-	}
 	// FINISH GET AREA
 	
 	// ADD AREA 
@@ -111,11 +117,12 @@ public class AreaController{
 	@RequestMapping(value="index",params = "btnAdd")
 	public String addArea(ModelMap model,@ModelAttribute("area") NhaTroEntity area)
 	{
-		System.out.println("check add area");
+		System.out.println("check add area "+this.getCT(mact).toString());
 		model.addAttribute("areas",this.getAreas());
 		String uuid = UUID.randomUUID().toString();
 //		area.setMANT("MK"+getAreas().size()+100);
 		area.setMANT(uuid);
+		area.setChutro(this.getCT(mact));
 		Integer temp = this.insertArea(area);
 		if(temp != 0)
 				model.addAttribute("message", "Thêm thành công");
@@ -189,6 +196,7 @@ public class AreaController{
 			t.commit();
 			String success = "Xóa thành công Nhà trọ "+id+" !";
 			model.addAttribute("message", success);
+			model.addAttribute("areas",this.getAreas());
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			e.printStackTrace();

@@ -1,9 +1,11 @@
 package qlpt.controller;
 
 import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import qlpt.entity.DichVuEntity;
 import qlpt.entity.LoaiPhongEntity;
@@ -32,24 +35,29 @@ public class RoomController {
 	
 	@Autowired
 	SessionFactory factory;
+	
+	private String mact;
+	
 	@RequestMapping("index")
-	public String index(ModelMap model,@ModelAttribute("room") PhongEntity room,@RequestParam("page") Integer page)
+	public String index(ModelMap model,@ModelAttribute("room") PhongEntity room,HttpSession ss)
 	{
-		List<PhongEntity> rooms = this.getRooms(page,6);
+		mact = ss.getAttribute("mact").toString();
+		System.out.println("index "+mact);
+		List<PhongEntity> rooms = this.getRooms();
 		model.addAttribute("rooms",rooms);
 		model.addAttribute("formHide",null);
-		if(page + 1 <= this.getRooms().size() / 6 && page >= 0)
-		{
-			model.addAttribute("page",page);
-		}else
-		{
-			model.addAttribute("page",-1);
-		}
-		if(page == 0)
-		{
-			System.out.println(this.getRooms().size() / 6 + 1);
-			model.addAttribute("page",this.getRooms().size() / 6 + 1);
-		}
+//		if(page + 1 <= this.getRooms().size() / 6 && page >= 0)
+//		{
+//			model.addAttribute("page",page);
+//		}else
+//		{
+//			model.addAttribute("page",-1);
+//		}
+//		if(page == 0)
+//		{
+//			System.out.println(this.getRooms().size() / 6 + 1);
+//			model.addAttribute("page",this.getRooms().size() / 6 + 1);
+//		}
 		return "room/index";
 	}
 	@RequestMapping(value="index",params="linkAdd")
@@ -59,10 +67,23 @@ public class RoomController {
 		model.addAttribute("formHide",1);
 		return "room/index";
 	}
-	public List<PhongEntity> getRooms() {
+	public List<String> getMANT()
+	{
+		System.out.println("getMANT "+mact);
 		Session session = factory.getCurrentSession();
-		String hql = "FROM PhongEntity";
+		String hql = "SELECT MANT FROM NhaTroEntity WHERE MACT = :mact";
 		Query query = session.createQuery(hql);
+		query.setParameter("mact", mact);
+		List<String> list = query.list();
+		return list;
+	}
+	public List<PhongEntity> getRooms() {
+//		String result = String.join(",",this.getMANT());
+//		System.out.println(result);
+		Session session = factory.getCurrentSession();
+		String hql = "FROM PhongEntity WHERE MANT in (:listMANT)";
+		Query query = session.createQuery(hql);
+		query.setParameterList("listMANT", this.getMANT());
 		List<PhongEntity> list = query.list();
 		return list;
 	}
@@ -79,8 +100,9 @@ public class RoomController {
 	public List<NhaTroEntity> getNhaTros()
 	{
 		Session session = factory.getCurrentSession();
-		String hql = "FROM NhaTroEntity";
+		String hql = "FROM NhaTroEntity WHERE MACT = :id";
 		Query query = session.createQuery(hql);
+		query.setParameter("id", mact);
 		List<NhaTroEntity> list = query.list();
 
 		return list;
@@ -157,7 +179,7 @@ public class RoomController {
 	@RequestMapping(value = "index", params = "btnEdit")
 	public String edit_Room(ModelMap model,
 			@ModelAttribute("room") PhongEntity room) {
-		
+	
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
@@ -172,7 +194,7 @@ public class RoomController {
 			int a = query.executeUpdate();
 			model.addAttribute("message", "Update thành công");
 			t.commit();
-			
+	
 		} catch (Exception e) {
 			// TODO: handle exception
 			t.rollback();
@@ -193,11 +215,15 @@ public class RoomController {
 	
 	// Thả dữ liệu vô form
 	@RequestMapping(value = "index/{id}", params = "linkEdit")
-	public String editRoom(ModelMap model,
-			 @PathVariable("id") Integer id) {
+	public String editRoommmm(@ModelAttribute("room") PhongEntity room,ModelMap model,
+			 @PathVariable("id") int id) {
 		model.addAttribute("btnStatus", "btnEdit");
+//		System.out.println("check1");
 		model.addAttribute("room", this.getRoom(id));
-		model.addAttribute("rooms", this.getRooms());
+	//	System.out.println(this.getRoom(id).getMAPHONG());
+
+//     	model.addAttribute("rooms", this.getRooms());
+//		System.out.println("check2");
 		model.addAttribute("formHide",1);
 		return "room/index";
 	}

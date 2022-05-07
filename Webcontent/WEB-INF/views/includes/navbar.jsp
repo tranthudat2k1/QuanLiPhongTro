@@ -11,7 +11,7 @@
 		<a class="navbar__func-item active" href="home/index.htm"> <i
 			class="bx bx-home-alt"></i>
 			<p>Trang chủ</p>
-		</a> <a class="navbar__func-item" href="room/index.htm?page=0"> <i
+		</a> <a class="navbar__func-item" href="room/index.htm"> <i
 			class="bx bx-building-house"></i>
 			<p>Phòng</p>
 		</a> <a class="navbar__func-item" href="area/index.htm"> <i

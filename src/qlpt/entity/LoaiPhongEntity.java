@@ -24,7 +24,7 @@ public class LoaiPhongEntity {
 	private double DONGIA;
 	private String MOTA;
 	
-	@OneToMany(mappedBy = "loaiPhong",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy = "loaiPhong",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
 	Collection<PhongEntity> dsPhong;
 
 	public Integer getMALOAI() {
