@@ -1,5 +1,6 @@
 package qlpt.entity;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "NHATRO")
-public class NhaTroEntity {
+public class NhaTroEntity implements Serializable {
 	@Id
 	private String MANT;
 	private String TENNT;
@@ -120,17 +121,5 @@ public class NhaTroEntity {
 
 	public void setDsQuyDinh(Collection<QuyDinhEntity> dsQuyDinh) {
 		this.dsQuyDinh = dsQuyDinh;
-	}
-
-	@Override
-	public String toString() {
-		return "NhaTroEntity [MANT=" + MANT + ", TENNT=" + TENNT + ", TINH_TP=" + TINH_TP + ", QUAN_HUYEN=" + QUAN_HUYEN
-				+ ", PHUONG_XA=" + PHUONG_XA + ", DIACHI=" + DIACHI + ", chutro=" + chutro + ", dsPhong=" + dsPhong
-				+ ", dsQuyDinh=" + dsQuyDinh + "]";
-	}
-
-
-	
-	
-	
+	}	
 }

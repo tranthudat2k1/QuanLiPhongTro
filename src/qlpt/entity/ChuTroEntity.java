@@ -164,12 +164,6 @@ public class ChuTroEntity {
 		this.dsNhaTro = dsNhaTro;
 	}
 
-	@Override
-	public String toString() {
-		return "ChuTroEntity [MACT=" + MACT + ", HO=" + HO + ", TEN=" + TEN + ", NAMSINH=" + NAMSINH + ", GIOITINH="
-				+ GIOITINH + ", CCCD=" + CCCD + ", DIACHI=" + DIACHI + ", EMAIL=" + EMAIL + ", SDT=" + SDT
-				+ ", TAIKHOAN=" + TAIKHOAN + ", PASSWORD=" + PASSWORD + ", dsNhaTro=" + dsNhaTro + "]";
-	}
 	
 	
 }
