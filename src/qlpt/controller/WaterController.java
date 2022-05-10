@@ -1,16 +1,11 @@
 package qlpt.controller;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -36,8 +31,8 @@ import qlpt.entity.TrangThaiEntity;
 
 @Transactional
 @Controller
-@RequestMapping("electricity/")
-public class ElectricityController {
+@RequestMapping("water/")
+public class WaterController {
 	@Autowired
 	SessionFactory factory;
 
@@ -57,7 +52,7 @@ public class ElectricityController {
 		model.addAttribute("dsCTDichVu", getCTDVTheoTG(THANG, NAM));
 		model.addAttribute("dsTrangThai", getDsTrangThai());
 		model.addAttribute("dsNhaTro", getDSNhaTro());
-		return "electricity/index1";
+		return "water/index";
 	}
 
 	@RequestMapping(value = "index", params = "btnXem")
@@ -72,9 +67,9 @@ public class ElectricityController {
 		int NAM = Integer.parseInt(dateStr.substring(dateStr.indexOf("/") + 1));
 		ThoiGianEntity t = getThoiGianTheoThangNam(THANG, NAM);
 		/* So sánh thời gian */
-		Date d = new Date("01/05/2022");
-		System.out.println("So sanh ngay: " + d.compareTo(new Date("01/03/2022")));
-
+		Date d= new Date("01/05/2022");
+		System.out.println("So sanh ngay: "+d.compareTo(new Date("01/03/2022")));
+		
 		if (t.getMATG() == 0) {
 			this.themThoiGian(THANG, NAM);
 		}
@@ -99,7 +94,7 @@ public class ElectricityController {
 		model.addAttribute("trangThai", maTTInt);
 		model.addAttribute("dsTrangThai", getDsTrangThai());
 		model.addAttribute("dsNhaTro", getDSNhaTro());
-		return "electricity/index1";
+		return "water/index";
 	}
 
 	public List<TrangThaiEntity> getDsTrangThai() {
@@ -122,7 +117,7 @@ public class ElectricityController {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM CTDichVuEntity WHERE dichVu.TENDV= :TENDV";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		List<CTDichVuEntity> dsDichVu = query.list();
 		return dsDichVu;
 	}
@@ -132,7 +127,7 @@ public class ElectricityController {
 		String hql = "FROM CTDichVuEntity WHERE dichVu.TENDV= :TENDV and thoiGian.THANG= :THANG and thoiGian.NAM= :NAM "
 				+ "and hopDong.DAHUY = 0";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		query.setParameter("THANG", THANG);
 		query.setParameter("NAM", NAM);
 		List<CTDichVuEntity> dsDichVu = query.list();
@@ -144,7 +139,7 @@ public class ElectricityController {
 		String hql = "FROM CTDichVuEntity WHERE dichVu.TENDV= :TENDV and thoiGian.THANG= :THANG and thoiGian.NAM= :NAM "
 				+ "and hopDong.DAHUY = 0 and hopDong.phong.nhatro.MANT= :MANT";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		query.setParameter("THANG", THANG);
 		query.setParameter("NAM", NAM);
 		query.setParameter("MANT", MANT);
@@ -157,7 +152,7 @@ public class ElectricityController {
 		String hql = "FROM CTDichVuEntity WHERE dichVu.TENDV= :TENDV and thoiGian.THANG= :THANG and thoiGian.NAM= :NAM "
 				+ "and hopDong.DAHUY = 0 and hopDong.phong.trangThai.MATT= :MATT";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		query.setParameter("THANG", THANG);
 		query.setParameter("NAM", NAM);
 		query.setParameter("MATT", MATT);
@@ -171,7 +166,7 @@ public class ElectricityController {
 				+ "and hopDong.DAHUY = 0 and hopDong.phong.nhatro.MANT= :MANT "
 				+ "and hopDong.phong.trangThai.MATT= :MATT";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		query.setParameter("THANG", THANG);
 		query.setParameter("NAM", NAM);
 		query.setParameter("MANT", MANT);
@@ -219,7 +214,7 @@ public class ElectricityController {
 			session.close();
 		}
 		/* model.addAttribute("dsCTDichVu", getCTDichVu()); */
-		return "electricity/index1";
+		return "water/index";
 	}
 
 	// ==================================================
@@ -258,7 +253,7 @@ public class ElectricityController {
 
 			if (ctdv1 != null && ctdv1.getCHISOCU() == 0) {
 				Integer i1 = this.updateCTDVTheoCSC(ctdv1, csm);
-			} else if (ctdv1 == null) {
+			} else if(ctdv1==null) {
 				CTDichVuEntity ctdv2 = new CTDichVuEntity(getService(maDv), getHopDongTheoMa(maHd),
 						getThoiGianTheoThangNam(THANG + 1, NAM), csm, 0);
 				this.themCTDV(ctdv2);
@@ -288,7 +283,7 @@ public class ElectricityController {
 		model.addAttribute("trangThai", maTTInt);
 		model.addAttribute("dsTrangThai", getDsTrangThai());
 		model.addAttribute("dsNhaTro", getDSNhaTro());
-		return "electricity/index1";
+		return "water/index";
 	}
 
 	// ==================================
@@ -306,11 +301,11 @@ public class ElectricityController {
 		return dv;
 	}
 
-	public int getMaDVDien() {
+	public int getMaDVNuoc() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM DichVuEntity where TENDV = :TENDV";
 		Query query = session.createQuery(hql);
-		query.setParameter("TENDV", "ĐIỆN");
+		query.setParameter("TENDV", "NƯỚC");
 		DichVuEntity dv = new DichVuEntity();
 		if (query.list().size() == 0) {
 			return -1;
@@ -329,13 +324,6 @@ public class ElectricityController {
 		return dv;
 	}
 
-	public List<QuyDinhEntity> getDsQuyDinh() {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM QuyDinhEntity";
-		Query query = session.createQuery(hql);
-		List<QuyDinhEntity> dv = query.list();
-		return dv;
-	}
 	public List<ThoiGianEntity> getDsThoiGian() {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM ThoiGianEntity";
@@ -384,15 +372,14 @@ public class ElectricityController {
 		List<HopDongEntity> dsHD = getDsHopDong();
 		List<CTDichVuEntity> dsCTDV = getCTDichVu();
 		List<CTDichVuEntity> ds = new ArrayList<CTDichVuEntity>();
-		int maDVDien = getMaDVDien();
+		int maDVNuoc = getMaDVNuoc();
 		ThoiGianEntity tg = getThoiGianTheoThangNam(THANG, NAM);
-		boolean kt;
-		/*Lấy những hợp đồng có tồn tại dịch vụ điện trong quy định*/
+		/*Lấy những hợp đồng có tồn tại dịch vụ nước trong quy định*/
 		for(int i=0;i<dsHD.size();i++) {
 			boolean kt1=false;
 			List<QuyDinhEntity> dsQDTmp=(List<QuyDinhEntity>) dsHD.get(i).getPhong().getNhatro().getDsQuyDinh();
 			for(QuyDinhEntity q:dsQDTmp) {
-				if(q.getDichVu().getMADV()==maDVDien) {
+				if(q.getDichVu().getMADV()==maDVNuoc) {
 					kt1=true;
 					break;
 				}
@@ -402,6 +389,7 @@ public class ElectricityController {
 				i--;
 			}
 		}
+		boolean kt;
 		for (HopDongEntity h : dsHD) {
 			kt = true;
 			for (CTDichVuEntity c : dsCTDV) {
@@ -412,7 +400,7 @@ public class ElectricityController {
 				}
 			}
 			if (kt) {
-				ds.add(new CTDichVuEntity(getService(getMaDVDien()), h, tg, 0, 0));
+				ds.add(new CTDichVuEntity(getService(getMaDVNuoc()), h, tg, 0, 0));
 			}
 		}
 		return ds;
@@ -502,26 +490,5 @@ public class ElectricityController {
 			session.close();
 		}
 		return 1;
-	}
-
-//	Tạo mã hóa đơn ngẫu nhiên
-	private static final String alpha = "abcdefghijklmnopqrstuvwxyz";
-	private static final String alphaUpperCase = alpha.toUpperCase();
-	private static final String digits = "0123456789";
-	private static final String ALPHA_NUMERIC = alpha + alphaUpperCase + digits;
-	private static Random generator = new Random();
-
-	public String randomAlphaNumeric(int numberOfCharactor) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < numberOfCharactor; i++) {
-			int number = randomNumber(0, ALPHA_NUMERIC.length() - 1);
-			char ch = ALPHA_NUMERIC.charAt(number);
-			sb.append(ch);
-		}
-		return sb.toString();
-	}
-
-	public static int randomNumber(int min, int max) {
-		return generator.nextInt((max - min) + 1) + min;
 	}
 }

@@ -37,6 +37,9 @@ public class CTDichVuEntity implements Serializable {
 	@JoinColumn(name = "MATG")
 	private ThoiGianEntity thoiGian;
 	
+	private int CHISOCU;
+	private int CHISOMOI;
+	
 	
 	public CTDichVuEntity() {
 		super();
@@ -47,11 +50,10 @@ public class CTDichVuEntity implements Serializable {
 		this.dichVu = dichVu;
 		this.hopDong = hopDong;
 		this.thoiGian = thoiGian;
-		CHISOCU = cHISOCU;
-		CHISOMOI = cHISOMOI;
+		this.CHISOCU = cHISOCU;
+		this.CHISOMOI = cHISOMOI;
 	}
-	private int CHISOCU;
-	private int CHISOMOI;
+	
 	public DichVuEntity getDichVu() {
 		return dichVu;
 	}
@@ -67,6 +69,7 @@ public class CTDichVuEntity implements Serializable {
 	public ThoiGianEntity getThoiGian() {
 		return thoiGian;
 	}
+	
 	public void setThoiGian(ThoiGianEntity thoiGian) {
 		this.thoiGian = thoiGian;
 	}
@@ -82,5 +85,6 @@ public class CTDichVuEntity implements Serializable {
 	public void setCHISOMOI(int cHISOMOI) {
 		CHISOMOI = cHISOMOI;
 	}
+	
 
 }

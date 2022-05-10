@@ -3,6 +3,7 @@ package qlpt.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -27,6 +28,7 @@ public class QuyDinhEntity implements Serializable{
 	private DichVuEntity dichVu;
 	
 	private double DONGIA;
+	private String MOTA;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -64,12 +66,23 @@ public class QuyDinhEntity implements Serializable{
 		NGAYQD = nGAYQD;
 	}
 
-	public QuyDinhEntity(NhaTroEntity nhaTro, DichVuEntity dichVu, double dONGIA, Date nGAYQD) {
+	
+
+	public QuyDinhEntity(NhaTroEntity nhaTro, DichVuEntity dichVu, double dONGIA, String mOTA, Date nGAYQD) {
 		super();
 		this.nhaTro = nhaTro;
 		this.dichVu = dichVu;
 		DONGIA = dONGIA;
+		MOTA = mOTA;
 		NGAYQD = nGAYQD;
+	}
+
+	public String getMOTA() {
+		return MOTA;
+	}
+
+	public void setMOTA(String mOTA) {
+		MOTA = mOTA;
 	}
 
 	public QuyDinhEntity() {

@@ -12,34 +12,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table( name = "DICHVU")
-public class DichVuEntity{
+@Table(name = "DICHVU")
+public class DichVuEntity {
 	@Id
 	@GeneratedValue
 	@Column(name = "MADV")
 	private int MADV;
-	
+
 	@Column(name = "TENDV")
 	private String TENDV;
+
 	
-	@Column(name = "MOTA")
-	private String MOTA;
-	
+
 	@Column(name = "DONVITINH")
 	private String DONVITINH;
 	
+	
+
 	@OneToMany(mappedBy = "dichVu", fetch = FetchType.EAGER)
 	private List<QuyDinhEntity> dsQuyDinh;
 
 	@OneToMany(mappedBy = "dichVu", fetch = FetchType.EAGER)
 	private Collection<CTDichVuEntity> dsCT;
 
-	public DichVuEntity(int mADV, String tENDV, String mOTA, String dONVITINH, List<QuyDinhEntity> dsQuyDinh,
+	public DichVuEntity(int mADV, String tENDV, String dONVITINH, List<QuyDinhEntity> dsQuyDinh,
 			Collection<CTDichVuEntity> dsCT) {
 		super();
 		MADV = mADV;
 		TENDV = tENDV;
-		MOTA = mOTA;
 		DONVITINH = dONVITINH;
 		this.dsQuyDinh = dsQuyDinh;
 		this.dsCT = dsCT;
@@ -65,14 +65,6 @@ public class DichVuEntity{
 		TENDV = tENDV;
 	}
 
-	public String getMOTA() {
-		return MOTA;
-	}
-
-	public void setMOTA(String mOTA) {
-		MOTA = mOTA;
-	}
-
 	public String getDONVITINH() {
 		return DONVITINH;
 	}
@@ -96,13 +88,14 @@ public class DichVuEntity{
 	public void setDsCT(Collection<CTDichVuEntity> dsCT) {
 		this.dsCT = dsCT;
 	}
+
 	public int getQuyDinh(String maNT) {
-		for(int i=0;i<dsQuyDinh.size();i++) {
-			if(dsQuyDinh.get(i).getNhaTro().getMANT().equals(maNT)) {
+		for (int i = 0; i < dsQuyDinh.size(); i++) {
+			if (dsQuyDinh.get(i).getNhaTro().getMANT().equals(maNT)) {
 				return i;
 			}
 		}
 		return -1;
 	}
-	
+
 }

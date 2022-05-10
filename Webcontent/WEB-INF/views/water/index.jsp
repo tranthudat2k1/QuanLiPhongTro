@@ -32,20 +32,10 @@
 			<div class="row">
 				<div class="c-12">
 					<div class="box" style="width: 95%; padding: 16px; padding-top: 0; height: auto;">
-						<form:form action="electricity/index.htm" method="post">
+						<form:form action="water/index.htm" method="post">
 							<div class="box__title">
 								<div class="d-md-flex" style="justify-content: space-between;">
-									<h2 style="font-weight: bold;">Chỉ số điện</h2>
-									<!-- <div>
-										<a href="electricity/save.htm">
-											<button class="btn btn-primary me-md-2 bg-success"
-												type="button" style="border-color: #fffafa;"
-												onclick=clickLuuCTDV()>
-												<i class='bx bx-plus'
-													style="font-size: 16px; font-weight: bold;"></i> Lưu
-											</button>
-										</a>
-									</div> -->
+									<h2 style="font-weight: bold;">Chỉ số nước</h2>
 								</div>
 							</div>
 							<br>
@@ -106,7 +96,7 @@
 								</div>
 								<h5>Lưu ý</h5>
 								<ul>
-									<li>Bạn phải gán dịch vụ thuộc loại điện cho khách thuê
+									<li>Bạn phải gán dịch vụ thuộc loại nước cho khách thuê
 										trước thì phần chỉ số này mới được tính cho phòng đó khi tính
 										tiền.</li>
 									<li>Đối với lần đầu tiên sử dụng phần mềm bạn sẽ phải
@@ -114,6 +104,7 @@
 										tiếp theo phần mềm sẽ tự động lấy chỉ số mới tháng trước làm
 										chỉ số cũ tháng sau.</li>
 								</ul>
+
 								<c:choose>
 									<c:when test="${lbThongBaoThemDV.equals('1')}">
 										<div style="color: #04AA6D">Lưu thành công!</div>
@@ -131,23 +122,16 @@
 											<th scope="col">Nhà</th>
 											<th scope="col">Phòng</th>
 											<th scope="col">Khách thuê</th>
-											<th scope="col" style="width: 15%;">Chỉ số điện cũ</th>
-											<th scope="col" style="width: 15%;">Chỉ số điện mới</th>
+											<th scope="col" style="width: 15%;">Chỉ số nước cũ</th>
+											<th scope="col" style="width: 15%;">Chỉ số nước mới</th>
 											<th scope="col">Sử dụng</th>
 											<th scope="col"></th>
 										</tr>
 									</thead>
 									<tbody id="table_services">
 										<c:forEach items="${dsCTDichVu}" var="dv">
-											<%-- <form:input path="hopDong" class="form-control" type="hidden"
-												value="${dv.getHopDong()}" />
-											<form:input path="dichVu" class="form-control" type="hidden"
-												value="${dv.getDichVu()}" />
-											<form:input path="thoiGian" class="form-control"
-												type="hidden" value="${dv.getThoiGian()}" /> --%>
-
 											<tr>
-												<form action="electricity/saveCTDV.htm" method="post">
+												<form action="water/saveCTDV.htm" method="post">
 													<input name="hopDong1" style="display: none;"
 														value="${dv.getHopDong().getMAHOPDONG() }" /> <input
 														name="dichVu1" style="display: none;"
@@ -184,7 +168,4 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-	
-</script>
 <%@include file="/WEB-INF/views/includes/footer.jsp"%>

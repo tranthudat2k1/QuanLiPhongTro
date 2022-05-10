@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "THOIGIAN")
 public class ThoiGianEntity {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@GeneratedValue
 	private int MATG;
 	
 	private Integer THANG;
@@ -29,6 +29,15 @@ public class ThoiGianEntity {
 		NAM = nAM;
 		this.dsCTDV = dsCTDV;
 	}
+	
+
+	public ThoiGianEntity(Integer tHANG, Integer nAM) {
+		super();
+		THANG = tHANG;
+		NAM = nAM;
+	}
+
+
 
 	public ThoiGianEntity() {
 		super();

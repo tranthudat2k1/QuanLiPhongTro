@@ -20,7 +20,7 @@
 			<p>Dịch vụ</p>
 		</a> <a href="electricity/index.htm" class="navbar__func-item"> <i class="bx bx-cloud-lightning"></i>
 			<p>Chỉ số Điện</p>
-		</a> <a class="navbar__func-item"> <i class="bx bx-water"></i>
+		</a> <a href="water/index.htm" class="navbar__func-item"> <i class="bx bx-water"></i>
 			<p>Chỉ số nước</p>
 		</a> <a class="navbar__func-item"> <i class='bx bxs-magic-wand'></i>
 			<p>Phát sinh</p>

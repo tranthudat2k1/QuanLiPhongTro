@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="<c:url value ='/resources/js/main.js'/>"></script>
+<script src="<c:url value ='/resources/js/main.js'/>"
+	type="text/javascript"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -40,7 +41,8 @@
       };
       date_input.datepicker(options);
     })
+   
 </script>
-</body>
+<body></body>
 
-</html>
+<html></html>

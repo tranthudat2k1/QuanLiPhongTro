@@ -11,7 +11,9 @@ const activeNavItem=(index)=>
 for(let i=0;i<item_nav.length;i++)
 	item_nav[i].onclick=activeNavItem;
 	*/
-	
+
+
+
 	
 	
 	

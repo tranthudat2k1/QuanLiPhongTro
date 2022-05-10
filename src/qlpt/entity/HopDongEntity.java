@@ -22,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "HOPDONG")
 public class HopDongEntity{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private int MAHOPDONG;
 	
 	@Temporal(TemporalType.DATE)

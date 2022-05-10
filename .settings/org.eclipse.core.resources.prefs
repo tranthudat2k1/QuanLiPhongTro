@@ -3,3 +3,5 @@ encoding//Webcontent/WEB-INF/views/includes/footer.jsp=UTF-8
 encoding//Webcontent/WEB-INF/views/includes/navbar.jsp=UTF-8
 encoding//src/qlpt/controller/ElectricityController.java=UTF-8
 encoding//src/qlpt/controller/ServiceController.java=UTF-8
+encoding//src/qlpt/controller/WaterController.java=UTF-8
+encoding//src/qlpt/entity/DichVuEntity.java=UTF-8
