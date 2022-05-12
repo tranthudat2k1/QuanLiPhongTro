@@ -23,8 +23,8 @@ public class KhachThueEntity {
 	private String SDT;
 	private String NGHENGHIEP;
 	
-	@OneToMany(mappedBy = "khachThue",fetch = FetchType.EAGER)
-	private Collection<HopDongEntity> dsHopDong;
+	@OneToMany(mappedBy = "khachThueDaiDien",fetch = FetchType.EAGER)
+	private Collection<HopDongEntity> dsHopDong;// đây là danh sách những hợp đồng mà khách thuê đó đại diện đứng tên
 	
 	@OneToMany(mappedBy = "khachThue",fetch = FetchType.EAGER)
 	private Collection<CTKhachThueEntity> dsCTKT;

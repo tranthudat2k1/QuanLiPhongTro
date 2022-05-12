@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,19 +27,19 @@ public class HopDongEntity{
 	private int MAHOPDONG;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date NGAYKY;
 	
 	private double TIENCOC;
 	private Boolean DAHUY;
 	
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	private Date THOIHAN;
 	
-	@ManyToOne
-	@JoinColumn(name = "MAKTDAIDIEN")
-	private KhachThueEntity khachThue;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MAKTDAIDIEN",referencedColumnName="MAKT")
+	private KhachThueEntity khachThueDaiDien;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MAPHONG")
@@ -93,12 +94,14 @@ public class HopDongEntity{
 		THOIHAN = tHOIHAN;
 	}
 
-	public KhachThueEntity getKhachThue() {
-		return khachThue;
+
+
+	public KhachThueEntity getKhachThueDaiDien() {
+		return khachThueDaiDien;
 	}
 
-	public void setKhachThue(KhachThueEntity khachThue) {
-		this.khachThue = khachThue;
+	public void setKhachThueDaiDien(KhachThueEntity khachThueDaiDien) {
+		this.khachThueDaiDien = khachThueDaiDien;
 	}
 
 	public PhongEntity getPhong() {
@@ -138,7 +141,7 @@ public class HopDongEntity{
 	}
 
 	public HopDongEntity(int mAHOPDONG, Date nGAYKY, double tIENCOC, Boolean dAHUY, Date tHOIHAN,
-			KhachThueEntity khachThue, PhongEntity phong, Collection<HoaDonEntity> dsHoaDon,
+			KhachThueEntity khachThueDaiDien, PhongEntity phong, Collection<HoaDonEntity> dsHoaDon,
 			Collection<CTDichVuEntity> dsCTDichVu, Collection<CTKhachThueEntity> dsCTKT) {
 		super();
 		MAHOPDONG = mAHOPDONG;
@@ -146,12 +149,13 @@ public class HopDongEntity{
 		TIENCOC = tIENCOC;
 		DAHUY = dAHUY;
 		THOIHAN = tHOIHAN;
-		this.khachThue = khachThue;
+		this.khachThueDaiDien = khachThueDaiDien;
 		this.phong = phong;
 		this.dsHoaDon = dsHoaDon;
 		this.dsCTDichVu = dsCTDichVu;
 		this.dsCTKT = dsCTKT;
 	}
+
 
 	
 	

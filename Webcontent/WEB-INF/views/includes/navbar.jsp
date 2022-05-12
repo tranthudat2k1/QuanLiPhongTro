@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@include file="/WEB-INF/views/includes/taglib.jsp"%>
 <div class="cus_navbar">
 	<div class="cus_header">
 		<h1>QUẢN LÝ NHÀ TRỌ</h1>
 		<p>SIMPLE HOUSE</p>
 	</div>
-	<p class="navbar__hello">Xin chào, TRẦN ĐẠT</p>
+	<p class="navbar__hello">Xin chào, ${sessionScope.hoten }</p>
 	<div class="navbar__func">
 		<a class="navbar__func-item active" href="home/index.htm"> <i
 			class="bx bx-home-alt"></i>

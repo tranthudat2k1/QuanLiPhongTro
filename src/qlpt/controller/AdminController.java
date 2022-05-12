@@ -49,11 +49,17 @@ public class AdminController {
 	public String handlerLogin(HttpServletRequest request,ModelMap model,HttpServletResponse response, HttpSession session)
 	{
 		String MACT  = checkAccount(request.getParameter("TAIKHOAN"),request.getParameter("PASSWORD"));
+		if(request.getParameter("TAIKHOAN").trim().length() == 0 ||request.getParameter("PASSWORD").trim().length() == 0 )
+		{
+			model.addAttribute("message", "Tên đăng nhập hoặc mật khẩu không được bỏ trống !");
+			return "login/index";
+		}
 		if(MACT.equalsIgnoreCase("xyz") == false)
 		{
 			try {
 				session = request.getSession();
 				session.setAttribute("mact", MACT);
+//				session.setAttribute("hoten", this.getHoTen(MACT));
 				String url = "/home/"+"index.htm";
 	            response.sendRedirect(request.getContextPath() + url);
 			} catch (Exception e) {
@@ -61,11 +67,20 @@ public class AdminController {
 				e.printStackTrace();	
 			}
 		}
-		 model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu !");
+		model.addAttribute("message", "Sai tên đăng nhập hoặc mật khẩu !");
 		return "login/index";
 		
 	}
-
+	public String getHoTen(String mact)
+	{
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT Ho,Ten FROM ChuTroEntity WHERE MACT = :mact";
+		Query query = session.createQuery(hql);
+		query.setParameter("mact", mact);
+		List<ChuTroEntity> list = query.list();
+		String hoTen = list.get(0).getHO()+ " "+list.get(0).getTEN();
+		return hoTen;
+	}
 	public String checkAccount(String username,String password)
 	{
 		Session session = factory.getCurrentSession();

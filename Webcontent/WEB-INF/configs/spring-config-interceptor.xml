@@ -31,6 +31,10 @@
 			<mvc:mapping path="/room/**"/>
 			<bean class="qlpt.interceptor.LoggerInterceptor" />
 		</mvc:interceptor>
+		 <mvc:interceptor>
+			<mvc:mapping path="/room/index.htm?linkAdd"/>
+			<bean class="qlpt.interceptor.RoomInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 </beans>
