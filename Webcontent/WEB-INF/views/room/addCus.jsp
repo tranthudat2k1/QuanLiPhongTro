@@ -41,7 +41,7 @@
 						<form:input id="cccd" class="form-control" path="CCCD" />
 					</div>
 					<div class="form-group col-6">
-						<label for="email" class="room__label">SĐT</label>
+						<label for="email" class="room__label">Email</label>
 						<form:input id="email" class="form-control" path="EMAIL" />
 
 					</div>

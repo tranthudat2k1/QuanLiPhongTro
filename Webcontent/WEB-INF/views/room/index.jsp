@@ -9,7 +9,7 @@
 	<main class="container">
 
 		<div class="room">
-		<c:choose>
+			<c:choose>
 				<c:when test="${ sessionScope.mact != null}">
 					<p>Đã đăng nhập ${mact }</p>
 				</c:when>
@@ -18,8 +18,8 @@
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${formHide != null }">
-					<h2 class="room_name">Thêm phòng</h2>
-			<hr />
+				<h2 class="room_name">Thêm phòng</h2>
+				<hr />
 				<form:form modelAttribute="room" method="POST"
 					action="room/index.htm">
 					<form:input path="MAPHONG" style="display:none" />
@@ -46,12 +46,12 @@
 							itemLabel="TENLOAI" itemValue="MALOAI">
 						</form:select>
 					</div>
-						<div class="col-8">
-							<label for="MoTa" class="room__label">Mô Tả Riêng</label>
-							<form:textarea class="form-control" id="MoTa" rows="3"
-								path="MOTARIENG" value="Phòng ngonnnnn"></form:textarea>
-							<form:errors path="MOTARIENG" />
-						</div>
+					<div class="col-8">
+						<label for="MoTa" class="room__label">Mô Tả Riêng</label>
+						<form:textarea class="form-control" id="MoTa" rows="3"
+							path="MOTARIENG" value="Phòng ngonnnnn"></form:textarea>
+						<form:errors path="MOTARIENG" />
+					</div>
 					<button type="submit" name="${btnStatus}"
 						class="btn btn-success mt-3">
 						<i class='bx bx-save'
@@ -97,11 +97,8 @@
 					<tbody>
 						<c:forEach var="r" items="${rooms}">
 							<tr>
-								<td style="width: 7%">
-								<a href="room/desc-hop-dong/${r.MAPHONG}.htm">
-								${r.MAPHONG}
-								</a>
-								</td>
+								<td style="width: 7%"><a
+									href="room/desc-hop-dong/${r.MAPHONG}.htm"> ${r.MAPHONG} </a></td>
 								<td style="width: 8%">${r.loaiPhong.SLNGUOITD}</td>
 								<td style="width: 15%">${r.loaiPhong.DONGIA }</td>
 								<td style="width: 10%">${r.nhatro.TENNT }</td>
@@ -113,19 +110,17 @@
 								<td style="text-align: center;"><a
 									href="room/index/${r.MAPHONG}.htm?linkEdit"><i
 										class='bx bx-edit' style="font-size: 18px;"></i></a></td>
-								<td style="font-size: 24px;text-align:center">
-								<c:choose>
-									<c:when test="${r.trangThai.MATT != 3 }">
-										<a href="room/addCustomer/${r.MAPHONG}.htm">
-									<i class='bx bx-user-plus' style="font-size: 22px"></i>
-									</a>
-									</c:when>
-									<c:otherwise>
-									<i class='bx bx-user-plus' style="font-size: 22px;color:gray"></i>
-									</c:otherwise>
-								</c:choose>
-									
-								</td>
+								<td style="font-size: 24px; text-align: center"><c:choose>
+										<c:when test="${r.trangThai.MATT == 3 }">
+											<i class='bx bx-user-plus'
+												style="font-size: 22px; color: gray"></i>
+										</c:when>
+										<c:otherwise>
+											<a href="room/addCustomer/${r.MAPHONG}.htm"> <i
+												class='bx bx-user-plus' style="font-size: 22px"></i>
+											</a>
+										</c:otherwise>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 
@@ -133,12 +128,12 @@
 				</table>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-end">
-		
+
 						<li class="page-item"><a class="page-link"
 							href="room/index.htm?page=${ page - 1 }"> < Prev</a></li>
 						<li class="page-item"><a class="page-link"
 							href="room/index.htm?page=${page + 1 }">Next > </a></li>
-	
+
 					</ul>
 				</nav>
 			</c:if>

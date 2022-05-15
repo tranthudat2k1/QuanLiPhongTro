@@ -41,7 +41,7 @@ public class HopDongEntity{
 	@JoinColumn(name = "MAKTDAIDIEN",referencedColumnName="MAKT")
 	private KhachThueEntity khachThueDaiDien;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MAPHONG")
 	private PhongEntity phong;
 	

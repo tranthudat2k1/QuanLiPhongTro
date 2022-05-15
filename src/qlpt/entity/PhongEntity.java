@@ -35,7 +35,7 @@ public class PhongEntity implements Serializable{
 	@JoinColumn(name = "MALOAI")
 	private LoaiPhongEntity loaiPhong;
 	
-	@OneToMany(mappedBy = "phong",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy = "phong",fetch = FetchType.LAZY,cascade = CascadeType.ALL,orphanRemoval = true)
 	Collection<HopDongEntity> dsHopDong;
 
 	@OneToMany(mappedBy = "phong",fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)

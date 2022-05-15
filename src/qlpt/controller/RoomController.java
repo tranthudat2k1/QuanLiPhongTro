@@ -550,7 +550,7 @@ public class RoomController {
 	}
 
 	@RequestMapping(value = "themHopDong", method = RequestMethod.POST)
-	public String addHopDong(ModelMap model, @ModelAttribute("hopdong") HopDongEntity hopdong) {
+	public String addHopDong(ModelMap model, @ModelAttribute("hopdong") HopDongEntity hopdong,RedirectAttributes redirectAttributes) {
 		CTKhachThueEntity ctkt = new CTKhachThueEntity();
 		ctkt.setHopDong(hopdong);
 		ctkt.setKhachThue(this.kt);
@@ -563,15 +563,25 @@ public class RoomController {
 			hopdong.setKhachThueDaiDien(a);
 		hopdong.setPhong(this.getRoom(this.idPhong));
 		hopdong.setDAHUY(false);
-
-		Integer temp1 = this.insertCustomer(this.kt);
-		Integer temp = this.insertHopDong(hopdong);
+	
+		Integer temp = this.insertCustomer(this.kt);
+		Integer temp1 = this.insertHopDong(hopdong);
 		Integer temp2 = this.insertCTKT(ctkt);
-		if (temp != 0 && temp1 != 0 && temp2 != 0)
-			model.addAttribute("message", "Thêm khách vào phòng thành công");
+		
+		int sltd = hopdong.getPhong().getLoaiPhong().getSLNGUOITD();
+		if (temp != 0 && temp1 != 0 && temp2 != 0) {
+			Long x = checkSoNguoiThue(this.idPhong);
+			if(sltd == x)
+			{
+				this.updateTrangThaiPhong(this.idPhong,3);
+			}else if((sltd<x) && (x>0)) {
+				this.updateTrangThaiPhong(this.idPhong,2);
+			}
+			redirectAttributes.addFlashAttribute("message", "Thêm khách vào phòng thành công");
+		}
 		else
-			model.addAttribute("message", "Thêm khách thất bại!");
-		model.addAttribute("rooms", this.getRooms());
+			redirectAttributes.addFlashAttribute("message", "Thêm khách thất bại!");
+		redirectAttributes.addFlashAttribute("rooms", this.getRooms());
 		return "room/index";
 	}
 
@@ -604,5 +614,42 @@ public class RoomController {
 		model.addAttribute("khach", list);
 		return "room/descPhong";
 	}
+	
+	// check so nguoi thue hien tai de doi trang thai
+	public Long checkSoNguoiThue(Integer maPhong)
+	{
+		Session session = factory.getCurrentSession();
+		String hql = "Select count (*) FROM HopDongEntity hd WHERE hd.phong.MAPHONG = :idPhong AND hd.DAHUY = false";
+		Query query = session.createQuery(hql);
+		query.setParameter("idPhong", maPhong);	
+		Long soNguoi = (Long) query.uniqueResult();
+		return soNguoi;
+	}
+	public Integer updateTrangThaiPhong(int maPhong,int maTT)
+	{
+
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+		String hql = "update PhongEntity set trangThai.MATT = :maTT where MAPHONG = :maPhong";
+			Query query = session.createQuery(hql);
+			query.setParameter("maTT",maTT);
+			query.setParameter("maPhong",maPhong);
+			int a = query.executeUpdate();
+			t.commit();
+			return 1;
+		} catch (Exception e) {
+			// TODO: handle exception
+			t.rollback();
+			e.printStackTrace();
+			return 0;
+		}
+		finally
+		{
+			session.close();
+		}
+	}
+	// end check so nguoi
+
 //END KHACHTHUE
 }
